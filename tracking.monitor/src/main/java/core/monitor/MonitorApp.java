@@ -31,33 +31,22 @@ public class MonitorApp {
 
 		System.out.println("Processador");
 		Processador processador = looca.getProcessador();
-		System.out.println(processador.getFabricante());
-		System.out.println(processador.getUso());
-		System.out.println(processador.getFrequencia());
-		System.out.println(processador.getId());
-		System.out.println(processador.getNome());
-		System.out.println(processador.getNumeroCpusFisicas());
-		System.out.println(processador.getIdentificador());
-		System.out.println(processador.getMicroarquitetura());
-		System.out.println(processador.getNumeroPacotesFisicos());
+		System.out.println(processador);
 
 		System.out.println("");
 		System.out.println("Memória");
 		Memoria memoria = new Memoria();
-		System.out.println(memoria.getTotal());
-		System.out.println(memoria.getDisponivel());
-		System.out.println(memoria.getEmUso());
+		System.out.println(memoria);
+
 		System.out.println("");
 		System.out.println("Disco");
-		/*Disco disco = new Disco();*/
-
+//		Disco disco = new Disco();
+//		System.out.println(disco)
 		DiscoGrupo discoGrupo = new DiscoGrupo();
+		System.out.println("");
+		System.out.println("Grupo de disco");
 		DiscoGrupo grupoDeDiscos = looca.getGrupoDeDiscos();
-		List<Disco> discos = grupoDeDiscos.getDiscos();
-
-		for (Disco disco : discos) {
-			System.out.println(disco);
-		}
+		System.out.println(grupoDeDiscos);
 
 		System.out.println("Temperatura");
 		Temperatura temperatura = new Temperatura();
