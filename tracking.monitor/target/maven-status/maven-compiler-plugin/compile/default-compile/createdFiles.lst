@@ -1,1 +1,2 @@
 core\monitor\MonitorApp.class
+core\monitor\service\Conexao.class
