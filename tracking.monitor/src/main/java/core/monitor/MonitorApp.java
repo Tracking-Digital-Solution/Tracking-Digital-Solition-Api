@@ -9,6 +9,7 @@ import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;
 import com.github.britooo.looca.api.group.temperatura.Temperatura;
 
+import core.monitor.components.MaquinaCorporativa;
 import core.monitor.service.Conexao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.w3c.dom.ls.LSOutput;
@@ -41,11 +42,12 @@ public class MonitorApp {
 		String nomeMaquina = rede.getParametros().getHostName();
 
 		//Inserindo em MaquinaCoporativa
-		con.update("insert into MaquinaCorporativa(IP,sistemaOperacional,fkPerfil,fkEndereco,nomeMaquina) " +
-				"values " +
-				"(?,?,?,?,?)",
-				ip, sistemaOperacional, 1, 1, nomeMaquina);
+//		con.update("insert into MaquinaCorporativa(IP,sistemaOperacional,nomeMaquina) " +
+//				"values " +
+//				"(?,?,?,?,?)",
+//				ip, sistemaOperacional, 1, 1, nomeMaquina);
 
+		System.out.println(new MaquinaCorporativa().toString());
     }
 
 }
