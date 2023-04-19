@@ -27,6 +27,9 @@ public class MaquinaCorporativa {
 	}
 
 
+	public Integer getIndex(){
+		return 1;
+	}
 	public Looca getLooca() {
 		return looca;
 	}
@@ -51,14 +54,14 @@ public class MaquinaCorporativa {
 		return nomeMaquina;
 	}
 
-//	@Override
-//	public String toString() {
-//		return String.format(
-//				"Máquina Corporativa\n" +
-//						"Ip: %s\n" +
-//						"Sistema operacional: %s\n" +
-//						"Nome da máquina: %s\n\n",
-//				ip,sistemaOperacional,nomeMaquina
-//		);
-//	}
+	@Override
+	public String toString() {
+		return String.format(
+				"Máquina Corporativa\n" +
+						"Ip: %s\n" +
+						"Sistema operacional: %s\n" +
+						"Nome da máquina: %s\n\n",
+				ip,sistemaOperacional,nomeMaquina
+		);
+	}
 }
