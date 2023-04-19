@@ -1,9 +1,8 @@
-package core.monitor.components;
+package core.monitor.service;
 
-import core.monitor.service.Conexao;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public interface Conection {
+public interface ITemplateJdbc {
 	Conexao conexao = new Conexao();
 	JdbcTemplate con = conexao.getConexaoDoBanco();
 }
