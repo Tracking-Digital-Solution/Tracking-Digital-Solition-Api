@@ -5,22 +5,19 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.rede.Rede;
 import com.github.britooo.looca.api.group.sistema.Sistema;
-import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;
 import com.github.britooo.looca.api.group.temperatura.Temperatura;
 
-import core.monitor.components.MaquinaCorporativa;
+import core.monitor.components.maquina.MaquinaCorporativa;
+import core.monitor.components.maquina.MaquinaCorporativaExecute;
 import core.monitor.service.Conexao;
+import core.monitor.service.Ilooca;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.w3c.dom.ls.LSOutput;
-import oshi.software.os.OSFileStore;
-
-import java.util.List;
 
 /*
  * @author gabsm
  */
-public class MonitorApp {
+public class MonitorApp implements Ilooca {
 
 
 	public static void main(String[] args) {
@@ -29,25 +26,14 @@ public class MonitorApp {
 		Conexao conexao = new Conexao();
 		JdbcTemplate con = conexao.getConexaoDoBanco();
 
-		Sistema sistema = looca.getSistema();
-		Processador processador = looca.getProcessador();
-		Memoria memoria = new Memoria();
-		DiscoGrupo discoGrupo = new DiscoGrupo();
-		Temperatura temperatura = new Temperatura();
-		Rede rede = looca.getRede();
 
-		//Variaveis
-		String ip = rede.getParametros().getServidoresDns().toString();
-		String sistemaOperacional = sistema.getSistemaOperacional();
-		String nomeMaquina = rede.getParametros().getHostName();
 
 		//Inserindo em MaquinaCoporativa
-//		con.update("insert into MaquinaCorporativa(IP,sistemaOperacional,nomeMaquina) " +
-//				"values " +
-//				"(?,?,?,?,?)",
-//				ip, sistemaOperacional, 1, 1, nomeMaquina);
+		MaquinaCorporativa maquina = new MaquinaCorporativa();
+//		maquina.setMapMaquinaCorporativa();
+		System.out.println(Math.round(processador.getUso()));
+		System.out.println();
 
-		System.out.println(new MaquinaCorporativa().toString());
     }
 
 }
