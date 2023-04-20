@@ -1,1 +1,4 @@
+core\monitor\entidades\cpu\CpuMaquinaCorporativa.class
+core\monitor\entidades\maquina\MaquinaCorporativa.class
 core\monitor\MonitorApp.class
+core\monitor\entidades\cpu\ColetaCpu.class

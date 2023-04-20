@@ -1,5 +1,12 @@
 package core.monitor.entidades.maquina;
 
+import core.monitor.entidades.cpu.ColetaCpu;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MaquinaCorporativa {
 	private Integer idMaquinaCorporativa;
 	private String ip;
@@ -7,6 +14,8 @@ public class MaquinaCorporativa {
 //	private Perfil perfil;
 //	private Endereco Endereco;
 	private String nomeMaquina;
+
+	private List<ColetaCpu> listaColetaCpu = new ArrayList<>();
 
 
 	public MaquinaCorporativa(Integer idMaquinaCorporativa, String ip, String sistemaOperacional, String nomeMaquina) {
@@ -16,6 +25,9 @@ public class MaquinaCorporativa {
 		this.nomeMaquina = nomeMaquina;
 	}
 
+	public List<ColetaCpu> getListaColetaCpu() {
+		return listaColetaCpu;
+	}
 	public Integer getIdMaquinaCorporativa() {
 		return idMaquinaCorporativa;
 	}
