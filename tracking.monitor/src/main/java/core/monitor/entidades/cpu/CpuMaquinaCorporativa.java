@@ -15,6 +15,9 @@ public class CpuMaquinaCorporativa {
 		this.nomeProcessador = nomeProcessador;
 	}
 
+	public CpuMaquinaCorporativa() {
+	}
+
 	public List<ColetaCpu> getListaColetaCpu() {
 		return listaColetaCpu;
 	}

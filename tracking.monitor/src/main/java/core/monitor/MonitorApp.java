@@ -1,19 +1,20 @@
 package core.monitor;
 
 import core.monitor.entidades.maquina.MaquinaCorporativa;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-
+import core.monitor.repositorio.MaquinaCorporativaRepositorio;
+import core.monitor.resources.Ilooca;
 /*
  * @author gabsm
  */
 
-public class MonitorApp{
+public class MonitorApp implements Ilooca {
 
 	public static void main(String[] args) {
+		MaquinaCorporativaRepositorio maquinaCorporativaRepositorio = new MaquinaCorporativaRepositorio();
+		maquinaCorporativaRepositorio.executeQueryUpdateMaquinaCorporativa(
+				new MaquinaCorporativa(null,ip,sistema.getSistemaOperacional(), processador.getNome())
+		);
 //		Looca looca = new Looca();
-		SpringApplication.run(MonitorApp.class,args);
-
 //		Sistema sistema = looca.getSistema();
 //		sistema.getPermissao();
 //		sistema.getFabricante();

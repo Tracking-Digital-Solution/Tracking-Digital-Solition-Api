@@ -22,6 +22,9 @@ public class ColetaCpu {
 		this.cpuMaquinaCorporativa = cpuMaquinaCorporativa;
 	}
 
+	public ColetaCpu() {
+	}
+
 	public Integer getIdCpu() {
 		return IdCpu;
 	}
