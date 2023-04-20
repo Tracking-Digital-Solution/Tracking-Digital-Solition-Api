@@ -1,11 +1,12 @@
 package core.monitor.components.maquina;
 
 import core.monitor.service.ITemplateJdbc;
+import core.monitor.service.Ilooca;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.List;
 
-public class MaquinaCorporativaExecute implements ITemplateJdbc {
+public class MaquinaCorporativaExecute implements Ilooca {
 	protected void executeQuery(String ip, String sistemaOperacional, String nomeMaquina) {
 //		System.out.println(validationMachine());
 		try {
@@ -14,7 +15,6 @@ public class MaquinaCorporativaExecute implements ITemplateJdbc {
 						sistemaOperacional, ip);
 				con.update("update nomeMaquina SET (?) where ip = ?",
 						nomeMaquina, ip);
-
 				System.out.println(
 						String.format(
 								"Máquina Corporativa: %s\n" +

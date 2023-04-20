@@ -3,11 +3,13 @@ package core.monitor.components.maquina;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.rede.Rede;
 import com.github.britooo.looca.api.group.sistema.Sistema;
+import core.monitor.service.Ilooca;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MaquinaCorporativa {
+public class MaquinaCorporativa implements Ilooca {
 	Looca looca = new Looca();
 	Rede rede = looca.getRede();
 	//Variaveis
@@ -16,6 +18,9 @@ public class MaquinaCorporativa {
 	Sistema sistema = new Sistema();
 	MaquinaCorporativaExecute maquina = new MaquinaCorporativaExecute();
 	String sistemaOperacional = sistema.getSistemaOperacional();
+
+	String idMaquinaCorporativa = getIndex();
+
 	Map<String, String> mapMaquinaCorporativa = new HashMap<>();
 
 	//Metodos
@@ -27,8 +32,12 @@ public class MaquinaCorporativa {
 	}
 
 
-	public Integer getIndex(){
-		return 1;
+	public String getIndex(){
+		 String id = con.queryForObject(String.format(
+				 "select (idMaquinaCorporativa) from MaquinaCorporativa where ip = %s", ip
+				 ),
+				new BeanPropertyRowMapper<String>(String.class));
+		return id;
 	}
 	public Looca getLooca() {
 		return looca;
