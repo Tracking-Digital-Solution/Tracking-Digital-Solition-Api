@@ -1,25 +1,30 @@
 package core.monitor.entidades.cpu;
 
 import core.monitor.entidades.maquina.MaquinaCorporativa;
+import org.springframework.jdbc.core.RowCallbackHandler;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ColetaCpu {
 	private Integer IdCpu;
 	private Double usoAtual;
 	private MaquinaCorporativa maquinaCorporativa;
 	private LocalDateTime dataHora;
-	private CpuMaquinaCorporativa cpuMaquinaCorporativa;
+	private CpuDadosEstaticos cpuDadosEstaticos;
 
 
-	public ColetaCpu(Integer idCpu, Double usoAtual, MaquinaCorporativa maquinaCorporativa, LocalDateTime dataHora, CpuMaquinaCorporativa cpuMaquinaCorporativa) {
-		IdCpu = idCpu;
+	public ColetaCpu(
+			Integer idCpu,
+			Double usoAtual,
+			MaquinaCorporativa maquinaCorporativa,
+			LocalDateTime dataHora,
+			CpuDadosEstaticos cpuDadosEstaticos
+	) {
+		this.IdCpu = idCpu;
 		this.usoAtual = usoAtual;
 		this.maquinaCorporativa = maquinaCorporativa;
 		this.dataHora = dataHora;
-		this.cpuMaquinaCorporativa = cpuMaquinaCorporativa;
+		this.cpuDadosEstaticos = cpuDadosEstaticos;
 	}
 
 	public ColetaCpu() {
@@ -57,11 +62,11 @@ public class ColetaCpu {
 		this.dataHora = dataHora;
 	}
 
-	public CpuMaquinaCorporativa getCpuMaquinaCorporativa() {
-		return cpuMaquinaCorporativa;
+	public CpuDadosEstaticos getCpuMaquinaCorporativa() {
+		return cpuDadosEstaticos;
 	}
 
-	public void setCpuMaquinaCorporativa(CpuMaquinaCorporativa cpuMaquinaCorporativa) {
-		this.cpuMaquinaCorporativa = cpuMaquinaCorporativa;
+	public void setCpuMaquinaCorporativa(CpuDadosEstaticos cpuDadosEstaticos) {
+		this.cpuDadosEstaticos = cpuDadosEstaticos;
 	}
 }

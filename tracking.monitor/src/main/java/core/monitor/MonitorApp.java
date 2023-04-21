@@ -1,69 +1,70 @@
 package core.monitor;
 
-import core.monitor.entidades.maquina.MaquinaCorporativa;
-import core.monitor.repositorio.MaquinaCorporativaRepositorio;
-import core.monitor.resources.Ilooca;
+import core.monitor.repositorio.Ilooca;
+import core.monitor.services.ColetaCpuService;
+import core.monitor.services.CpuDadosEstaticosService;
+import core.monitor.services.MaquinaCorporativaService;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
+
+import java.net.UnknownHostException;
 /*
  * @author gabsm
  */
 
 public class MonitorApp implements Ilooca {
 
-	public static void main(String[] args) {
-		MaquinaCorporativaRepositorio maquinaCorporativaRepositorio = new MaquinaCorporativaRepositorio();
-		maquinaCorporativaRepositorio.executeQueryUpdateMaquinaCorporativa(
-				new MaquinaCorporativa(null,ip,sistema.getSistemaOperacional(), processador.getNome())
-		);
-//		Looca looca = new Looca();
-//		Sistema sistema = looca.getSistema();
-//		sistema.getPermissao();
-//		sistema.getFabricante();
-//		sistema.getArquitetura();
-//		sistema.getInicializado();
-//		sistema.getSistemaOperacional();
-//
-//		System.out.println("Processador");
-//		Processador processador = looca.getProcessador();
-//		System.out.println(processador.getFabricante());
-//		System.out.println(processador.getUso());
-//		System.out.println(processador.getFrequencia());
-//		System.out.println(processador.getId());
-//		System.out.println(processador.getNome());
-//		System.out.println(processador.getNumeroCpusFisicas());
-//		System.out.println(processador.getIdentificador());
-//		System.out.println(processador.getMicroarquitetura());
-//		System.out.println(processador.getNumeroPacotesFisicos());
-//
-//		System.out.println("");
-//		System.out.println("Memória");
-//		Memoria memoria = new Memoria();
-//		System.out.println(memoria.getTotal());
-//		System.out.println(memoria.getDisponivel());
-//		System.out.println(memoria.getEmUso());
-//		System.out.println("");
-//		System.out.println("Disco");
-//		/*Disco disco = new Disco();*/
-//
-//		DiscoGrupo discoGrupo = new DiscoGrupo();
-//		DiscoGrupo grupoDeDiscos = looca.getGrupoDeDiscos();
-//		List<Disco> discos = grupoDeDiscos.getDiscos();
-//
-//		for (Disco disco : discos) {
-//			System.out.println(disco);
-//		}
-//
-//		System.out.println("Temperatura");
-//		Temperatura temperatura = new Temperatura();
-//		System.out.println(temperatura.getTemperatura());
-//
-//		System.out.println("Sistema");
-//		System.out.println(sistema.getPermissao());
-//        System.out.println(sistema.getFabricante());
-//        System.out.println(sistema.getArquitetura());
-//        System.out.println(sistema.getInicializado());
-//        System.out.println(sistema.getSistemaOperacional());
+	public static void main(String[] args) throws UnknownHostException {
+		try {
+			//Inserindo máquina
+			MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
+			if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
+				//Inserir dados nas tabelas de coleta
 
+				//Inserir CpuDadosEstaticos
+				CpuDadosEstaticosService cpuDadosEstaticosService = new CpuDadosEstaticosService();
+				cpuDadosEstaticosService.executeQueryInsertCpuDadosEstaticos();
+
+				//Inserir ColetaCpu
+				ColetaCpuService coletaCpuService = new ColetaCpuService();
+				coletaCpuService.executeQueryInsertColetaCpu();
+
+			} else {
+				System.out.println("Erro 500! não existe nada");
+			}
+		} catch (CannotGetJdbcConnectionException e) {
+			System.out.println("Não há conexão com o banco!");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 
-
+	@Override
+	public String getIp() {
+		return null;
+	}
 }
+
+
+//	List<MaquinaCorporativa> listAllMaquinaCorporativa = getAllMaquinaCorporativa();
+//	List<ColetaCpu> listAllColetaCpu = getAllColetaCpu();
+//	List<CpuDadosEstaticos> listAllCpuDadosEstaticos = getAllCpuDadosEstaticos();
+
+
+//	public List<MaquinaCorporativa> getAllMaquinaCorporativa() {
+//		List<MaquinaCorporativa> select = con.query(
+//				"select * from MaquinaCorporativa",
+//				new BeanPropertyRowMapper<>(MaquinaCorporativa.class));
+//		return select;
+//	}
+//
+//	public List<ColetaCpu> getAllColetaCpu() {
+//		return con.query(
+//				"select * from MaquinaCorporativa",
+//				new BeanPropertyRowMapper<>(ColetaCpu.class));
+//	}
+//
+//	public List<CpuDadosEstaticos> getAllCpuDadosEstaticos() {
+//		return con.query(
+//				"select * from MaquinaCorporativa",
+//				new BeanPropertyRowMapper<>(CpuDadosEstaticos.class));
+//	}

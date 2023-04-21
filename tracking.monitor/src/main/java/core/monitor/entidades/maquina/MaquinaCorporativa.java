@@ -24,6 +24,9 @@ public class MaquinaCorporativa {
 	public MaquinaCorporativa() {
 	}
 
+	public MaquinaCorporativa(MaquinaCorporativa maquinaCorporativa01) {
+	}
+
 	public List<ColetaCpu> getListaColetaCpu() {
 		return listaColetaCpu;
 	}
