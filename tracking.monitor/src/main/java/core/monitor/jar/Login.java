@@ -2,7 +2,7 @@ package core.monitor.jar;
 
 import core.monitor.repositorio.Ilooca;
 import core.monitor.resources.ConexaoService;
-import login.jar.Usuario;
+import core.monitor.jar.Usuario;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +16,7 @@ public class Login extends javax.swing.JFrame implements Ilooca {
 	JdbcTemplate con = conexao.getConexaoDoBanco();
 	String email;
 	String senha;
-	// Variables declaration - do not modify//GEN-BEGIN:variables
+	// Variables declaration - do not modify                     
 	private javax.swing.JButton btn_entrar;
 	private javax.swing.JTextField ipt_email;
 	private javax.swing.JTextField ipt_senha;
@@ -201,6 +201,6 @@ public class Login extends javax.swing.JFrame implements Ilooca {
 	public String getIp() {
 		return null;
 	}
-	// End of variables declaration//GEN-END:variables
+	// End of variables declaration                   
 
 }

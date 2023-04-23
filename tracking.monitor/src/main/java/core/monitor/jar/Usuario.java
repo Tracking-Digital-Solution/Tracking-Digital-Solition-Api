@@ -1,4 +1,4 @@
-package login.jar;
+package core.monitor.jar;
 
 public class Usuario {
     private Integer id; 

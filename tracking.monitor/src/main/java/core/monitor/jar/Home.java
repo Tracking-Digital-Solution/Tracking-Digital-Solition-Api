@@ -5,6 +5,9 @@
 package core.monitor.jar;
 
 import core.monitor.repositorio.Ilooca;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,11 +20,18 @@ public class Home extends javax.swing.JFrame implements Ilooca {
      */
     public Home() {
         initComponents();
+        System.out.println("---------- TRACKING MONITOR ---------\n\n");
+        System.out.println("INFORMAÇÕES DO SISTEMA\n");
         System.out.println(sistema);
+        System.out.println("INFORMAÇÕES DO PROCESSADOR\n");
         System.out.println(processador);
-        System.out.println(rede);
+        System.out.println("INFORMAÇÕES DA REDE\n");
+        System.out.println(rede.getGrupoDeInterfaces().getInterfaces());
+        System.out.println("INFORMAÇÕES DE MEMÓRIA\n");
         System.out.println(memoria);
-        System.out.println(discoGrupo);
+        System.out.println("INFORMAÇÕES DE DISCO\n\n");
+        System.out.println(discoGrupo.getDiscos());
+        System.out.println("------------------------------------");
     }
 
     /**
@@ -34,30 +44,62 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnAtualizarDados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("OI");
+        btnAtualizarDados.setText("Atualizar Dados");
+        btnAtualizarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarDadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(jLabel1)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(btnAtualizarDados)))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(jLabel1)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAtualizarDados)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAtualizarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarDadosActionPerformed
+
+        System.out.flush();
+        System.out.println("---------- TRACKING MONITOR ---------");
+        System.out.println("INFORMAÇÕES DO SISTEMA");
+        System.out.println(sistema);
+        System.out.println("INFORMAÇÕES DO PROCESSADOR");
+        System.out.println(processador);
+        System.out.println("INFORMAÇÕES DA REDE");
+        System.out.println(rede.getGrupoDeInterfaces().getInterfaces());
+        System.out.println("INFORMAÇÕES DE MEMÓRIA");
+        System.out.println(memoria);
+        System.out.println("INFORMAÇÕES DE DISCO");
+        System.out.println(discoGrupo.getDiscos());
+        System.out.println("------------------------------------");
+
+
+    }//GEN-LAST:event_btnAtualizarDadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,11 +137,12 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarDados;
     private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
 
     @Override
     public String getIp() {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    // End of variables declaration//GEN-END:variables
 }
