@@ -1,25 +1,15 @@
-package core.monitor.resources;
+package login.jar;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-/**
- * @author consultor
- */
-public class ConexaoService {
+public class Conexao {
 
     private JdbcTemplate conexaoDoBanco;
 
     //Configurando a conexão e o acesso
-
-    /**
-     *
-     */
-    public ConexaoService() {
+    public Conexao() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSource​.setUrl("jdbc:sqlserver://bd-tracking-digital-solution.database.windows.net:1433;database=trackingdigitalsolution;encrypt"
@@ -28,20 +18,9 @@ public class ConexaoService {
         dataSource​.setPassword("#Gfgrupo10");
 
         this.conexaoDoBanco = new JdbcTemplate(dataSource);
-
     }
-
-
 
     public JdbcTemplate getConexaoDoBanco() {
         return conexaoDoBanco;
     }
-
-    public Connection driverManager() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/trackingdigitalsolution",
-                "grupo10user",
-                "grupo10user");
-    }
 }
-

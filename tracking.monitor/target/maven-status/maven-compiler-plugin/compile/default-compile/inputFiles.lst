@@ -1,4 +1,15 @@
-C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Monitor\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\MonitorApp.java
-C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Monitor\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\ColetaCpu.java
-C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Monitor\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\CpuMaquinaCorporativa.java
-C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Monitor\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\maquina\MaquinaCorporativa.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\ColetaCpu.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\maquina\MaquinaCorporativa.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\CpuDadosEstaticos.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\repositorio\Ilooca.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\MonitorApp.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\ColetaCpuService.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\Home.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\Conexao.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\MaquinaCorporativaService.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\Usuario.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\repositorio\PerfilRepositorio.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\resources\ConexaoService.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\Login.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\resources\ITemplateJdbc.java
+C:\Users\Shirlei\Desktop\ISABELA\2-semestre-ads-a\Pesquisa-Inovacao\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\CpuDadosEstaticosService.java
