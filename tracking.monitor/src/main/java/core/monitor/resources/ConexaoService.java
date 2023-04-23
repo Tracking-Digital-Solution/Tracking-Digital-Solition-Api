@@ -22,10 +22,10 @@ public class ConexaoService {
     public ConexaoService() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSource​.setUrl("jdbc:sqlserver://bd-tracking-digital-solution.database.windows.net:1433;database=trackingdigitalsolution;encrypt"
+        dataSource.setUrl("jdbc:sqlserver://bd-tracking-digital-solution.database.windows.net:1433;database=trackingdigitalsolution;encrypt"
                 + "=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net");
-        dataSource​.setUsername("admin-tracking-digital-solution");
-        dataSource​.setPassword("#Gfgrupo10");
+        dataSource.setUsername("admin-tracking-digital-solution");
+        dataSource.setPassword("#Gfgrupo10");
 
         this.conexaoDoBanco = new JdbcTemplate(dataSource);
 

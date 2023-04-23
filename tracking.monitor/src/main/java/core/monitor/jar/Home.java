@@ -2,19 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package login.jar;
+package core.monitor.jar;
+
+import core.monitor.repositorio.Ilooca;
 
 /**
  *
  * @author patri
  */
-public class Home extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame implements Ilooca {
 
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
+        System.out.println(sistema);
+        System.out.println(processador);
+        System.out.println(rede);
+        System.out.println(memoria);
+        System.out.println(discoGrupo);
     }
 
     /**
@@ -89,5 +96,10 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+
+    @Override
+    public String getIp() {
+        return null;
+    }
     // End of variables declaration//GEN-END:variables
 }
