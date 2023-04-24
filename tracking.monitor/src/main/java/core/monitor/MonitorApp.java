@@ -13,24 +13,24 @@ import java.net.UnknownHostException;
 
 public class MonitorApp implements Ilooca {
 
-	public static void main(String[] args) throws UnknownHostException {
+	public static void main(String[] args){
 		try {
 			//Inserindo máquina
 			MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
-			if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
-				//Inserir dados nas tabelas de coleta
-
-				//Inserir CpuDadosEstaticos
+//			if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
+//				//Inserir dados nas tabelas de coleta
+//
+//				//Inserir CpuDadosEstaticos
 				CpuDadosEstaticosService cpuDadosEstaticosService = new CpuDadosEstaticosService();
 				cpuDadosEstaticosService.executeQueryInsertCpuDadosEstaticos();
-
-				//Inserir ColetaCpu
+//
+//				//Inserir ColetaCpu
 				ColetaCpuService coletaCpuService = new ColetaCpuService();
 				coletaCpuService.executeQueryInsertColetaCpu();
-
-			} else {
-				System.out.println("Erro 500! não existe nada");
-			}
+//
+//			} else {
+//				System.out.println("Erro 500! não existe nada");
+//			}
 		} catch (CannotGetJdbcConnectionException e) {
 			System.out.println("Não há conexão com o banco!");
 		} catch (Exception e) {

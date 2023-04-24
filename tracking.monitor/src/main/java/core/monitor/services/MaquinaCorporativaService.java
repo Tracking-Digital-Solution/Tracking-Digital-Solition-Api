@@ -64,6 +64,7 @@ public class MaquinaCorporativaService implements Ilooca {
 	public String getIp() {
 		Looca looca = new Looca();
 		Rede rede = looca.getRede();
+		System.out.println(rede.getParametros().getServidoresDns().toString());
 		return rede.getParametros().getServidoresDns().toString();
 	}
 

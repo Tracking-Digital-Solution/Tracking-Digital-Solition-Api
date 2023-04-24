@@ -6,7 +6,6 @@ import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.rede.Rede;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 import com.github.britooo.looca.api.group.temperatura.Temperatura;
-import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.resources.ITemplateJdbc;
 
 public interface Ilooca extends ITemplateJdbc {
