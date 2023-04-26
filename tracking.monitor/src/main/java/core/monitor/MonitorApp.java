@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 
 public class MonitorApp implements Ilooca {
 
-	public static void main(String[] args) throws UnknownHostException {
+	public static void main(String[] args){
 		try {
 			//Inserindo máquina
 			MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
@@ -29,7 +29,7 @@ public class MonitorApp implements Ilooca {
 				coletaCpuService.executeQueryInsertColetaCpu();
 
 			} else {
-				System.out.println("Erro 500! não existe nada");
+				System.out.println("Maquina não existe!");
 			}
 		} catch (CannotGetJdbcConnectionException e) {
 			System.out.println("Não há conexão com o banco!");

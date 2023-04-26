@@ -1,7 +1,6 @@
 package core.monitor.services;
 
 import core.monitor.entidades.cpu.CpuDadosEstaticos;
-import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.repositorio.Ilooca;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -12,14 +11,20 @@ public class CpuDadosEstaticosService implements Ilooca {
 	public void executeQueryInsertCpuDadosEstaticos() {
 		CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos();
 
-		insertCpuDadosEstaticos(processador.getNome());
-		List<CpuDadosEstaticos> list = getAllCpuDadosEstaticos();
+		try{
+			if ((returnExpectedAlreadyDataCpuDadosEstaticos().isEmpty())) {
+				insertCpuDadosEstaticos(processador.getNome());
+			}
+		}catch (IllegalStateException e){
+			System.out.println("Dados estaticos dessa máquina já existem!");
+		}
+
 	}
 
-	private void insertCpuDadosEstaticos( String nomeProcessador) {
+	private void insertCpuDadosEstaticos(String nomeProcessador) {
 		con.update(
 				"insert into CpuDadosEstaticos " +
-						"values (null, 75,(?))",
+						"values (75,(?))",
 				nomeProcessador
 		);
 	}
@@ -34,7 +39,7 @@ public class CpuDadosEstaticosService implements Ilooca {
 		try {
 			List<CpuDadosEstaticos> listaQuery = con.query("select idCpuDadosEstaticos,riscoCPU from CpuDadosEstaticos where idCpuDadosEstaticos = '" + idCpuDadosEstaticos + "'",
 					new BeanPropertyRowMapper<>(CpuDadosEstaticos.class));
-			return listaQuery.get(idCpuDadosEstaticos-1).getIdCpuDadosEstaticos();
+			return listaQuery.get(idCpuDadosEstaticos - 1).getIdCpuDadosEstaticos();
 		} catch (NullPointerException e) {
 			System.out.println("Não há dados cadastrados com esse ID!!");
 			return null;
@@ -42,6 +47,15 @@ public class CpuDadosEstaticosService implements Ilooca {
 			System.out.println(e.getMessage());
 			return null;
 		}
+	}
+
+	public List<Integer> returnExpectedAlreadyDataCpuDadosEstaticos() {
+		return con.query(
+				"select 1 from maquinacorporativa mc " +
+						"INNER JOIN coletacpu cc on mc.idMaquinaCorporativa = cc.idCPU " +
+						"INNER JOIN cpudadosestaticos ce on cc.idCPU = ce.idCpuDadosEstaticos",
+				new BeanPropertyRowMapper<>()
+		);
 	}
 
 	@Override

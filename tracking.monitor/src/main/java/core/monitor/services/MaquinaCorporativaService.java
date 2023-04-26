@@ -35,8 +35,8 @@ public class MaquinaCorporativaService implements Ilooca {
 			);
 
 			con.update(
-					"update MaquinaCorporativa set SistemaOperacional = (?),nomeMaquina = (?) where ip = (?)",
-					maquinaCorporativa.getSistemaOperacional(), maquinaCorporativa.getNomeMaquina(), maquinaCorporativa.getIp()
+					"update MaquinaCorporativa set SistemaOperacional = (?),ip = (?) where nomeMaquina = (?)",
+					maquinaCorporativa.getSistemaOperacional(), maquinaCorporativa.getIp(), maquinaCorporativa.getNomeMaquina()
 			);
 			System.out.println("Insert de coleta de dados CPU concluidos com êxito");
 			return true;
@@ -48,7 +48,7 @@ public class MaquinaCorporativaService implements Ilooca {
 
 	public Integer returnExpectedIdMaquinaCorporativa() {
 		try {
-			List<MaquinaCorporativa> listaQuery = con.query("select idMaquinaCorporativa from MaquinaCorporativa where ip = '" + getIp() + "'",
+			List<MaquinaCorporativa> listaQuery = con.query("select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName() + "'",
 					new BeanPropertyRowMapper<>(MaquinaCorporativa.class));
 			return listaQuery.get(0).getIdMaquinaCorporativa();
 		} catch (NullPointerException e) {

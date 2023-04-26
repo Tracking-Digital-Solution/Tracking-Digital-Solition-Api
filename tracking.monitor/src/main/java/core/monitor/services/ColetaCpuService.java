@@ -35,7 +35,7 @@ public class ColetaCpuService implements Ilooca {
 	public void insertCpu(Integer usoAtual, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer IdCpuDadosEstaicos) {
 		con.update(
 				"insert into ColetaCPU " +
-						"values (null, (?),(?),(?),(?))",
+						"values ((?),(?),(?),(?))",
 				usoAtual, dataHora, idMaquinaCorporativa, IdCpuDadosEstaicos
 		);
 	}
