@@ -38,7 +38,7 @@ public class MaquinaCorporativaService implements Ilooca {
 					"update MaquinaCorporativa set SistemaOperacional = (?),ip = (?) where nomeMaquina = (?)",
 					maquinaCorporativa.getSistemaOperacional(), maquinaCorporativa.getIp(), maquinaCorporativa.getNomeMaquina()
 			);
-			System.out.println("Insert de coleta de dados CPU concluidos com êxito");
+			System.out.println("Máquina: Atualizado concluido com êxito");
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
