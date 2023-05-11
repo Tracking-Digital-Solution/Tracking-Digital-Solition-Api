@@ -7,8 +7,8 @@ public class CpuDadosEstaticos {
 	private Integer idCpuDadosEstaticos;
 	private Integer riscoCPU;
 	private String nomeProcessador;
-
 	private List<ColetaCpu> listaColetaCpu = new ArrayList<>();
+
 	public CpuDadosEstaticos(Integer idCpuDadosEstaticos, Integer riscoCPU, String nomeProcessador) {
 		this.idCpuDadosEstaticos = idCpuDadosEstaticos;
 		this.riscoCPU = riscoCPU;

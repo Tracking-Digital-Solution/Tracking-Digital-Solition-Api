@@ -14,7 +14,7 @@ public class CpuDadosEstaticosService implements Ilooca {
 		CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos();
 
 		try {
-			if ((returnExpectedAlreadyDataCpuDadosEstaticos() != getSystemName())) {
+			if (!(returnExpectedAlreadyDataCpuDadosEstaticos().equals(getSystemName()))) {
 				insertCpuDadosEstaticos(processador.getNome());
 			}
 		} catch (IllegalStateException | UnknownHostException e) {
@@ -26,7 +26,7 @@ public class CpuDadosEstaticosService implements Ilooca {
 	private void insertCpuDadosEstaticos(String nomeProcessador) {
 		con.update(
 				"insert into CpuDadosEstaticos " +
-						"values (75,(?))",
+						"values (90,(?))",
 				nomeProcessador
 		);
 	}
@@ -41,7 +41,7 @@ public class CpuDadosEstaticosService implements Ilooca {
 		try {
 			List<CpuDadosEstaticos> listaQuery = con.query("select idCpuDadosEstaticos,riscoCPU from CpuDadosEstaticos where idCpuDadosEstaticos = '" + idCpuDadosEstaticos + "'",
 					new BeanPropertyRowMapper<>(CpuDadosEstaticos.class));
-			return listaQuery.get(idCpuDadosEstaticos - 1).getIdCpuDadosEstaticos();
+			return listaQuery.get(idCpuDadosEstaticos - 2).getIdCpuDadosEstaticos();
 		} catch (NullPointerException e) {
 			System.out.println("Não há dados cadastrados com esse ID!!");
 			return null;
