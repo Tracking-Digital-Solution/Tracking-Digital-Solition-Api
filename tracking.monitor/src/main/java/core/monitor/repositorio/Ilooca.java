@@ -11,6 +11,7 @@ import core.monitor.resources.ITemplateJdbc;
 
 public interface Ilooca extends ITemplateJdbc {
 	//Conexão Looca
+
 	Looca looca = new Looca();
 	Rede rede = looca.getRede();
 	Sistema sistema = looca.getSistema();

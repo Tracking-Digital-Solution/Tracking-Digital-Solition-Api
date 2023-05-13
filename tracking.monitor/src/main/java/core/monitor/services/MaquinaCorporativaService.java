@@ -17,7 +17,7 @@ public class MaquinaCorporativaService implements Ilooca {
 		return systemName;
 	}
 
-	public Boolean executeQueryUpdateMaquinaCorporativa() throws UnknownHostException {
+	public Boolean executeQueryUpdateMaquinaCorporativa() {
 		try {
 			String systemName = getSystemName();
 
@@ -48,7 +48,7 @@ public class MaquinaCorporativaService implements Ilooca {
 
 	public Integer returnExpectedIdMaquinaCorporativa() {
 		try {
-			List<MaquinaCorporativa> listaQuery = con.query("select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName() + "'",
+			List<MaquinaCorporativa> listaQuery = con.query("select top 1 idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName() + "'",
 					new BeanPropertyRowMapper<>(MaquinaCorporativa.class));
 			return listaQuery.get(0).getIdMaquinaCorporativa();
 		} catch (NullPointerException e) {

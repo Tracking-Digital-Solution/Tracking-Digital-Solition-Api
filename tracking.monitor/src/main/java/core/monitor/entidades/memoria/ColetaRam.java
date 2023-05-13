@@ -2,43 +2,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package core.monitor.entidades.hd;
+package core.monitor.entidades.memoria;
 
 import core.monitor.entidades.cpu.CpuDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
+
 import java.time.LocalDateTime;
 
 /**
  *
  * @author leska
  */
-public class ColetaHd {
+public class ColetaRam {
 
-    private Integer idHd;
+    private Integer idRam;
     private Double usoAtual;
     private MaquinaCorporativa maquinaCorporativa;
     private LocalDateTime dataHora;
-    private HdDadosEstaticos hdDadosEstaticos;
+    private RamDadosEstaticos ramDadosEstaticos;
 
     public void ColetaHd() {
     }
 
-    public ColetaHd(
-            Integer idHd
-            ,Double usoAtual
-            ,MaquinaCorporativa maquinaCorporativa
-            ,LocalDateTime dataHora
-            ,HdDadosEstaticos hdDadosEstaticos
+    public ColetaRam(
+            Integer idRam
+            , Double usoAtual
+            , MaquinaCorporativa maquinaCorporativa
+            , LocalDateTime dataHora
+            , CpuDadosEstaticos hdDadosEstaticos
     ) {
-        this.idHd = idHd;
+        this.idRam = idRam;
         this.usoAtual = usoAtual;
         this.maquinaCorporativa = maquinaCorporativa;
         this.dataHora = dataHora;
-        this.hdDadosEstaticos = hdDadosEstaticos;
+        this.ramDadosEstaticos = ramDadosEstaticos;
     }
 
-    public Integer getIdHd() {
-        return idHd;
+    public Integer getIdRam() {
+        return idRam;
     }
 
     public Double getUsoAtual() {
@@ -53,7 +54,7 @@ public class ColetaHd {
         return dataHora;
     }
 
-    public HdDadosEstaticos getHdDadosEstaticos() {
-        return hdDadosEstaticos;
+    public RamDadosEstaticos getRamDadosEstaticos() {
+        return ramDadosEstaticos;
     }
 }

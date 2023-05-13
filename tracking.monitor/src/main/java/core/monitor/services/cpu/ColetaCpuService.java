@@ -1,28 +1,22 @@
-package core.monitor.services;
+package core.monitor.services.cpu;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.rede.Rede;
-import core.monitor.entidades.cpu.ColetaCpu;
 import core.monitor.repositorio.Ilooca;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import core.monitor.services.MaquinaCorporativaService;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ColetaCpuService implements Ilooca {
 
 	public void executeQueryInsertColetaCpu() {
-
-
 		MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
-		CpuDadosEstaticosService cpuDadosEstaticosService = new CpuDadosEstaticosService();
-
-		Double doubleUsoAtual = looca.getProcessador().getUso();
+		Long doubleUsoAtual = processador.getFrequencia();
 		Integer usoAtual = doubleUsoAtual.intValue();
 		Integer idMaquinaCorporativa = maquinaCorporativaService.returnExpectedIdMaquinaCorporativa();
-		Integer idCpuDadosEstaticos = cpuDadosEstaticosService.returnExpectedIdCpuDadosEstaticos(idMaquinaCorporativa);
+		Integer idCpuDadosEstaticos = idMaquinaCorporativa;
 
-		insertCpu(
+		insertColetaCpuDinamico(
 				usoAtual,
 				LocalDateTime.now(),
 				idMaquinaCorporativa,
@@ -32,18 +26,12 @@ public class ColetaCpuService implements Ilooca {
 
 	}
 
-	public void insertCpu(Integer usoAtual, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer IdCpuDadosEstaicos) {
+	public void insertColetaCpuDinamico(Integer usoAtual, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer IdCpuDadosEstaicos) {
 		con.update(
 				"insert into ColetaCPU " +
 						"values ((?),(?),(?),(?))",
 				usoAtual, dataHora, idMaquinaCorporativa, IdCpuDadosEstaicos
 		);
-	}
-
-	private List<ColetaCpu> getAllColetaCpu() {
-		return con.query(
-				"select * from ColetaCpu",
-				new BeanPropertyRowMapper<>(ColetaCpu.class));
 	}
 
 	@Override

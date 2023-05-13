@@ -1,11 +1,14 @@
 package core.monitor;
 
+import core.monitor.entidades.memoria.RamDadosEstaticos;
 import core.monitor.repositorio.Ilooca;
-import core.monitor.services.ColetaCpuService;
-import core.monitor.services.ColetaHdService;
-import core.monitor.services.CpuDadosEstaticosService;
-import core.monitor.services.HdDadosEstaticoservice;
+import core.monitor.services.cpu.ColetaCpuService;
+import core.monitor.services.cpu.CpuDadosEstaticosService;
+import core.monitor.services.hd.ColetaHdService;
+import core.monitor.services.hd.HdDadosEstaticosService;
 import core.monitor.services.MaquinaCorporativaService;
+import core.monitor.services.ram.ColetaRamService;
+import core.monitor.services.ram.RamDadosEstaticosService;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 
 /*
@@ -21,34 +24,42 @@ public class MonitorApp implements Ilooca {
 			if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
 				//Inserir dados nas tabelas de coleta
 
-				//Inserir CpuDadosEstaticos
+				//Inserir CpuDadosEstaticos (DADOS ESTÁTICOS)
 				CpuDadosEstaticosService cpuDadosEstaticosService = new CpuDadosEstaticosService();
 				cpuDadosEstaticosService.executeQueryInsertCpuDadosEstaticos();
 
-				//Inserir ColetaCpu
+				//Inserir ColetaCpu (DADOS DINÂMICOS)
 				ColetaCpuService coletaCpuService = new ColetaCpuService();
 				coletaCpuService.executeQueryInsertColetaCpu();
                                 
-				//Inserir HdDadosEstaticos
-                                HdDadosEstaticoservice hdDadosEstaticoservice = new HdDadosEstaticoservice();
-                                hdDadosEstaticoservice.executeQueryInsertHdDadosEstaticos();
+				//Inserir HdDadosEstaticos (DADOS ESTÁTICOS)
+				HdDadosEstaticosService hdDadosEstaticoservice = new HdDadosEstaticosService();
+				hdDadosEstaticoservice.executeQueryInsertHdDadosEstaticos();
                                
                                 
-				//Inserir ColetahD
-//                               ColetaHdService coletaHdService = new ColetaHdService();
-//                               coletaHdService.executeQueryInsertColetaHd();
-//                               
-//				ColetaCpuService coletaCpuService = new ColetaCpuService();
-//				coletaCpuService.executeQueryInsertColetaCpu();
+				//Inserir ColetaHd (DADOS DINÂMICOS)
+				ColetaHdService coletaHdService = new ColetaHdService();
+				coletaHdService.executeQueryInsertColetaHd();
+
+				//Inserir RamDadosEstaticos (DADOS ESTÁTICOS)
+				RamDadosEstaticosService ramDadosEstaticosService = new RamDadosEstaticosService();
+				ramDadosEstaticosService.executeQueryInsertRamDadosEstaticos();
+
+				//Inserir ColetaRam (DADOS DINÂMICOS)
+				ColetaRamService coletaRamService = new ColetaRamService();
+				coletaRamService.executeQueryInsertColetaRam();
+
 
 			} else {
 				System.out.println("Maquina não existe!");
 			}
+
 		} catch (CannotGetJdbcConnectionException e) {
 			System.out.println("Não há conexão com o banco!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
@@ -56,28 +67,3 @@ public class MonitorApp implements Ilooca {
 		return null;
 	}
 }
-
-
-//	List<MaquinaCorporativa> listAllMaquinaCorporativa = getAllMaquinaCorporativa();
-//	List<ColetaCpu> listAllColetaCpu = getAllColetaCpu();
-//	List<CpuDadosEstaticos> listAllCpuDadosEstaticos = getAllCpuDadosEstaticos();
-
-
-//	public List<MaquinaCorporativa> getAllMaquinaCorporativa() {
-//		List<MaquinaCorporativa> select = con.query(
-//				"select * from MaquinaCorporativa",
-//				new BeanPropertyRowMapper<>(MaquinaCorporativa.class));
-//		return select;
-//	}
-//
-//	public List<ColetaCpu> getAllColetaCpu() {
-//		return con.query(
-//				"select * from MaquinaCorporativa",
-//				new BeanPropertyRowMapper<>(ColetaCpu.class));
-//	}
-//
-//	public List<CpuDadosEstaticos> getAllCpuDadosEstaticos() {
-//		return con.query(
-//				"select * from MaquinaCorporativa",
-//				new BeanPropertyRowMapper<>(CpuDadosEstaticos.class));
-//	}

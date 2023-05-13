@@ -1,49 +1,41 @@
-package core.monitor.services;
+package core.monitor.services.hd;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.rede.Rede;
 import core.monitor.entidades.cpu.ColetaCpu;
 import core.monitor.repositorio.Ilooca;
-import static core.monitor.resources.ITemplateJdbc.con;
+
+import core.monitor.services.MaquinaCorporativaService;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class ColetaHdService implements Ilooca {
 
 	public void executeQueryInsertColetaHd() {
-
-
 		MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
-		HdDadosEstaticoservice hdDadosEstaticosService = new HdDadosEstaticoservice();
-
-		Long longUsoAtual = looca.getMemoria().getEmUso();
-		Integer usoAtual = longUsoAtual.intValue();
+		Long longDisponivelHd = (discoGrupo.getVolumes().get(0).getDisponivel());
 		Integer idMaquinaCorporativa = maquinaCorporativaService.returnExpectedIdMaquinaCorporativa();
-		Integer idHdDadosEstaticos = hdDadosEstaticosService.returnExpectedIdhdDadosEstaticos(idMaquinaCorporativa);
-		insertHd(
-				usoAtual,
+		Integer idHdDadosEstaticos = idMaquinaCorporativa;
+
+		insertColetaHdDinamico(
+				longDisponivelHd,
 				LocalDateTime.now(),
 				idMaquinaCorporativa,
 				idHdDadosEstaticos
 		);
-		System.out.println("Insert coleta cpu: Concluído com êxito");
+		System.out.println("Insert coleta HD: Concluído com êxito");
 
 	}
 
-	public void insertHd(Integer usoAtual, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer idHdDadosEstaticos) {
+	public void insertColetaHdDinamico(Long disponivel, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer idHdDadosEstaticos) {
 		con.update(
 				"insert into ColetaHd " +
 						"values ((?),(?),(?),(?))",
-				usoAtual, dataHora, idMaquinaCorporativa, idHdDadosEstaticos
+				disponivel, dataHora, idMaquinaCorporativa, idHdDadosEstaticos
 		);
-	}
-
-	private List<ColetaCpu> getAllColetaCpu() {
-		return con.query(
-				"select * from ColetaCpu",
-				new BeanPropertyRowMapper<>(ColetaCpu.class));
 	}
 
 	@Override
