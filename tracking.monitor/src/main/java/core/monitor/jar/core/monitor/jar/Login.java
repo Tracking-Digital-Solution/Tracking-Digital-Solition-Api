@@ -134,7 +134,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         jLabel1.setBackground(new java.awt.Color(3, 29, 68));
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\gabsm\\Documents\\2º Semestre\\Pesquisa e Inovação\\Tracking-Digital-Solutions-Jar\\src\\main\\resources\\assets\\logo-tracking-monitor__1_-removebg-preview.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo-tracking-monitor__1_-removebg-preview.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
