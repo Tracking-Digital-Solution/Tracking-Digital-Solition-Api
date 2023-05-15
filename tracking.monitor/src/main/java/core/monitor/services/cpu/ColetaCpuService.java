@@ -11,7 +11,7 @@ public class ColetaCpuService implements Ilooca {
 
 	public void executeQueryInsertColetaCpu() {
 		MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
-		Long doubleUsoAtual = processador.getFrequencia();
+		Double doubleUsoAtual = processador.getUso();
 		Integer usoAtual = doubleUsoAtual.intValue();
 		Integer idMaquinaCorporativa = maquinaCorporativaService.returnExpectedIdMaquinaCorporativa();
 		Integer idCpuDadosEstaticos = idMaquinaCorporativa;

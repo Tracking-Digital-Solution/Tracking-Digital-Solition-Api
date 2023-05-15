@@ -1,15 +1,31 @@
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\CpuDadosEstaticosService.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\maquina\MaquinaCorporativa.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\resources\ConexaoService.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\CpuDadosEstaticos.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\ColetaHdService.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\HdDadosEstaticoservice.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\MonitorApp.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\ColetaCpu.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\resources\ITemplateJdbc.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\repositorio\PerfilRepositorio.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\hd\ColetaHd.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\repositorio\Ilooca.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\hd\HdDadosEstaticos.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\MaquinaCorporativaService.java
-C:\Users\leska\OneDrive\Documentos\Tracking-digital-solution\looca\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\ColetaCpuService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\CpuDadosEstaticos.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\jar\validacao\Validacao.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\resources\ConexaoService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\memoria\RamDadosEstaticos.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\repositorio\PerfilRepositorio.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\cpu\ColetaCpuService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\maquina\MaquinaCorporativa.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\cpu\ColetaCpu.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\memoria\ColetaRam.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\resources\ITemplateJdbc.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\resources\ConexaoServiceMySQL.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\hd\ColetaHdService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\hd\HdDadosEstaticosService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\jar\ConexaoMySql.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\jar\Usuario.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\repositorio\PerfilRepositorio.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\MonitorApp.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\cpu\CpuDadosEstaticosService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\MaquinaCorporativaService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\hd\ColetaHd.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\resources\ITemplateJdbc.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\repositorio\Ilooca.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\repositorio\Ilooca.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\ram\ColetaRamService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\registros\GeradorDeRegistros.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\jar\ConexaoAzure.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\entidades\hd\HdDadosEstaticos.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\jar\Home.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\resources\ConexaoService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\services\ram\RamDadosEstaticosService.java
+C:\Users\gabsm\Documents\2º Semestre\Pesquisa e Inovação\Tracking-Digital-Solition-Api\tracking.monitor\src\main\java\core\monitor\jar\core\monitor\jar\Login.java

@@ -17,22 +17,25 @@ public class ColetaRam {
 
     private Integer idRam;
     private Double usoAtual;
+    private Double disponivel;
     private MaquinaCorporativa maquinaCorporativa;
     private LocalDateTime dataHora;
     private RamDadosEstaticos ramDadosEstaticos;
 
-    public void ColetaHd() {
+    public ColetaRam() {
     }
 
     public ColetaRam(
             Integer idRam
             , Double usoAtual
+            , Double disponivel
             , MaquinaCorporativa maquinaCorporativa
             , LocalDateTime dataHora
-            , CpuDadosEstaticos hdDadosEstaticos
+            , RamDadosEstaticos ramDadosEstaticos
     ) {
         this.idRam = idRam;
         this.usoAtual = usoAtual;
+        this.disponivel = disponivel;
         this.maquinaCorporativa = maquinaCorporativa;
         this.dataHora = dataHora;
         this.ramDadosEstaticos = ramDadosEstaticos;
@@ -56,5 +59,9 @@ public class ColetaRam {
 
     public RamDadosEstaticos getRamDadosEstaticos() {
         return ramDadosEstaticos;
+    }
+
+    public Double getDisponivel() {
+        return disponivel;
     }
 }

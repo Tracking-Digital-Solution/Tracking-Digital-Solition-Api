@@ -15,23 +15,23 @@ import java.time.LocalDateTime;
 public class ColetaHd {
 
     private Integer idHd;
-    private Double usoAtual;
+    private Double disponivel;
     private MaquinaCorporativa maquinaCorporativa;
     private LocalDateTime dataHora;
     private HdDadosEstaticos hdDadosEstaticos;
 
-    public void ColetaHd() {
+    public ColetaHd() {
     }
 
     public ColetaHd(
             Integer idHd
-            ,Double usoAtual
+            ,Double disponivel
             ,MaquinaCorporativa maquinaCorporativa
             ,LocalDateTime dataHora
             ,HdDadosEstaticos hdDadosEstaticos
     ) {
         this.idHd = idHd;
-        this.usoAtual = usoAtual;
+        this.disponivel = disponivel;
         this.maquinaCorporativa = maquinaCorporativa;
         this.dataHora = dataHora;
         this.hdDadosEstaticos = hdDadosEstaticos;
@@ -41,8 +41,8 @@ public class ColetaHd {
         return idHd;
     }
 
-    public Double getUsoAtual() {
-        return usoAtual;
+    public Double getDisponivel() {
+        return disponivel;
     }
 
     public MaquinaCorporativa getMaquinaCorporativa() {
