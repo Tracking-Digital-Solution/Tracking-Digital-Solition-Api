@@ -2,6 +2,7 @@ package core.monitor.services.cpu;
 
 import core.monitor.entidades.cpu.CpuDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
+import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -9,7 +10,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 
-public class CpuDadosEstaticosService implements Ilooca {
+public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 
 	public void executeQueryInsertCpuDadosEstaticos() {
 		try {
@@ -24,7 +25,13 @@ public class CpuDadosEstaticosService implements Ilooca {
 	}
 
 	private void insertCpuDadosEstaticos(String nomeProcessador) {
-		con.update(
+		ITemplateJdbc.con.update(
+				"insert into CpuDadosEstaticos " +
+						"values (75,(?))",
+				nomeProcessador
+		);
+                
+                conMySQL.update(
 				"insert into CpuDadosEstaticos " +
 						"values (75,(?))",
 				nomeProcessador
@@ -32,7 +39,7 @@ public class CpuDadosEstaticosService implements Ilooca {
 	}
 	public String returnNameMachineByDatabase() throws UnknownHostException {
 		try {
-			List<MaquinaCorporativa> maquina = con.query(
+			List<MaquinaCorporativa> maquina = ITemplateJdbc.con.query(
 					"select top 1 mc.nomeMaquina from maquinacorporativa mc " +
 							"INNER JOIN coletacpu cc on mc.idMaquinaCorporativa = cc.idCPU " +
 							"INNER JOIN cpudadosestaticos ce on cc.idCPU = ce.idCpuDadosEstaticos " +
@@ -43,7 +50,11 @@ public class CpuDadosEstaticosService implements Ilooca {
 		} catch (Exception e) {
 			return "Inexistente";
 		}
+                
+                
 	}
+        
+        
 
 	private String getSystemName() throws UnknownHostException {
 		String systemName = InetAddress.getLocalHost().getHostName();
