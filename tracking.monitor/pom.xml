@@ -75,7 +75,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>core.monitor.jar.Login</mainClass> 
+                            <mainClass>core.monitor.jar.core.monitor.jar.Login</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

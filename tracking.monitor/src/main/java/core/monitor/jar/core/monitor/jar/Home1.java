@@ -21,12 +21,12 @@ import static java.lang.String.*;
  *
  * @author patri
  */
-public class Home extends javax.swing.JFrame implements Ilooca {
+public class Home1 extends javax.swing.JFrame implements Ilooca {
 
     /**
      * Creates new form Home
      */
-    public Home() throws UnknownHostException {
+    public Home1() throws UnknownHostException {
         initComponents();
 //        System.out.println("---------- TRACKING MONITOR ---------\n\n");
 //        System.out.println("INFORMAÇÕES DO SISTEMA\n");
@@ -49,21 +49,21 @@ public class Home extends javax.swing.JFrame implements Ilooca {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws UnknownHostException {
 
         btnAtualizarDados = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
+        usoAtualHd = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        usoAtualRAM = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -72,7 +72,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        usoAtualCPU = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -82,6 +82,8 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         dateTime = new javax.swing.JLabel();
+
+        FuncoesApi api = new FuncoesApi();
 
         btnAtualizarDados.setText("Atualizar Dados");
         btnAtualizarDados.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +97,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
 
         jPanel1.setBackground(new java.awt.Color(3, 29, 68));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
-
+        System.out.println(getClass());
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LOGO-JAVA-SWING.png"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel1.setMaximumSize(new java.awt.Dimension(150, 150));
@@ -103,17 +105,17 @@ public class Home extends javax.swing.JFrame implements Ilooca {
 
         jPanel2.setBackground(new java.awt.Color(187, 187, 187));
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel16.setText("45%");
+        usoAtualHd.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usoAtualHd.setForeground(new java.awt.Color(0, 0, 0));
+        usoAtualHd.setText(format("%d%%",api.buscarUsoAtualHD()));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel17.setText("43%");
+        jLabel17.setText(format("%.0f%%", api.buscarBancoHD()));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel18.setText("40%");
+        jLabel18.setText(format("%.0f%%", api.buscarBancoHDUltimo()));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
@@ -133,7 +135,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                     .addComponent(jLabel13)
                     .addComponent(jLabel11))
                 .addGap(94, 94, 94)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usoAtualHd, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -150,7 +152,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usoAtualHd, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(19, 19, 19))
@@ -160,15 +162,15 @@ public class Home extends javax.swing.JFrame implements Ilooca {
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel20.setText("56%");
+        jLabel20.setText(format("%.0f%%",api.buscarBancoRAM()));
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel19.setText("75%");
+        usoAtualRAM.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usoAtualRAM.setForeground(new java.awt.Color(0, 0, 0));
+        usoAtualRAM.setText(format("%d%%",api.buscarUsoAtualRAM()));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel21.setText("15%");
+        jLabel21.setText(format("%.0f%%",api.buscarBancoRAMUltimo()));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(0, 0, 0));
@@ -188,7 +190,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                     .addComponent(jLabel23)
                     .addComponent(jLabel22))
                 .addGap(98, 98, 98)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usoAtualRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86)
                 .addComponent(jLabel20)
                 .addGap(99, 99, 99)
@@ -205,7 +207,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel23))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usoAtualRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
@@ -223,15 +225,15 @@ public class Home extends javax.swing.JFrame implements Ilooca {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("10%");
+        jLabel12.setText(format("%.0f%%",api.buscarBancoCpu()));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setText("70%");
+        jLabel14.setText(format("%.0f%%",api.buscarBancoCpuUltimo()));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel15.setText("25%");
+        usoAtualCPU.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usoAtualCPU.setForeground(new java.awt.Color(0, 0, 0));
+        usoAtualCPU.setText(format("%.0f%%",api.buscarUsoAtualCPU()));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -243,7 +245,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                     .addComponent(jLabel6)
                     .addComponent(jLabel5))
                 .addGap(86, 86, 86)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usoAtualCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -256,7 +258,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usoAtualCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -354,7 +356,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(191, 191, 191)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(27, Short.MAX_VALUE))
+                        .addContainerGap(15, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dateTime)
@@ -455,9 +457,9 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void dateTimeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateTimeMouseClicked
-        Date dataSistema = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        dateTime.setText(formato.format(dataSistema));
+         Date dataSistema = new Date();
+         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+         dateTime.setText(formato.format(dataSistema));
     }//GEN-LAST:event_dateTimeMouseClicked
 
     /**
@@ -467,7 +469,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -510,11 +512,8 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -533,6 +532,9 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel usoAtualCPU;
+    private javax.swing.JLabel usoAtualHd;
+    private javax.swing.JLabel usoAtualRAM;
     // End of variables declaration//GEN-END:variables
 
     @Override
