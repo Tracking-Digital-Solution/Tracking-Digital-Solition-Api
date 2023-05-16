@@ -4,7 +4,9 @@
  */
 package core.monitor.jar.core.monitor.jar;
 
+import core.monitor.MonitorApp;
 import core.monitor.jar.core.monitor.jar.validacao.Validacao;
+import core.monitor.repositorio.Ilooca;
 
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ import java.util.Scanner;
  *
  * @author gabsm
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame implements Ilooca {
 
     /**
      * Creates new form JarExecutavel
@@ -229,6 +231,22 @@ public class Login extends javax.swing.JFrame {
                         && validacao.validarLoginMysql(email, senha)) {
 
                     System.out.println("Logado");
+
+                    System.out.println("---------- TRACKING MONITOR ---------\n\n");
+                    System.out.println("INFORMAÇÕES DO SISTEMA\n");
+                    System.out.println(sistema);
+                    System.out.println("INFORMAÇÕES DO PROCESSADOR\n");
+                    System.out.println(processador);
+                    System.out.println("INFORMAÇÕES DA REDE\n");
+                    System.out.println(rede.getGrupoDeInterfaces().getInterfaces());
+                    System.out.println("INFORMAÇÕES DE MEMÓRIA\n");
+                    System.out.println(memoria);
+                    System.out.println("INFORMAÇÕES DE DISCO\n\n");
+                    System.out.println(discoGrupo.getDiscos());
+                    System.out.println("------------------------------------");
+
+                    MonitorApp monitorApp = new MonitorApp();
+                    monitorApp.main(null);
                 } else {
                     System.out.println("Email ou senha errados");
                 }
@@ -262,5 +280,10 @@ public class Login extends javax.swing.JFrame {
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
+
+    @Override
+    public String getIp() {
+        return null;
+    }
     // End of variables declaration//GEN-END:variables
 }
