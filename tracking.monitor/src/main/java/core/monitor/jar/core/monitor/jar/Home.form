@@ -219,11 +219,11 @@
                           <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                      <Component id="jLabel16" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="usoAtualHD" min="-2" pref="144" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel17" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="usohd01" min="-2" pref="144" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel18" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="usohd02" min="-2" pref="144" max="-2" attributes="0"/>
                       <EmptySpace pref="96" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -239,9 +239,9 @@
                               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel16" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jLabel17" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jLabel18" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usoAtualHD" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usohd01" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usohd02" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -250,7 +250,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel16">
+            <Component class="javax.swing.JLabel" name="usoAtualHD">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -261,7 +261,7 @@
                 <Property name="text" type="java.lang.String" value="45%"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel17">
+            <Component class="javax.swing.JLabel" name="usohd01">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -272,7 +272,7 @@
                 <Property name="text" type="java.lang.String" value="43%"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel18">
+            <Component class="javax.swing.JLabel" name="usohd02">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -324,11 +324,11 @@
                           <Component id="jLabel22" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                      <Component id="jLabel19" min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="usoAtualRAM" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                      <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                      <Component id="usoram01" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="jLabel21" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="usoram02" min="-2" pref="144" max="-2" attributes="0"/>
                       <EmptySpace pref="106" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -344,9 +344,9 @@
                               <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel19" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jLabel20" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jLabel21" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usoAtualRAM" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usoram01" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usoram02" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -355,7 +355,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel20">
+            <Component class="javax.swing.JLabel" name="usoram01">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -366,7 +366,7 @@
                 <Property name="text" type="java.lang.String" value="56%"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel19">
+            <Component class="javax.swing.JLabel" name="usoAtualRAM">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -377,7 +377,7 @@
                 <Property name="text" type="java.lang.String" value="75%"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel21">
+            <Component class="javax.swing.JLabel" name="usoram02">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -429,11 +429,11 @@
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                      <Component id="jLabel15" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="usoAtualCPU" min="-2" pref="144" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel12" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="usocpu01" min="-2" pref="144" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel14" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="usocpu02" min="-2" pref="144" max="-2" attributes="0"/>
                       <EmptySpace pref="107" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -444,9 +444,9 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel15" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jLabel12" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jLabel14" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usoAtualCPU" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usocpu01" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="usocpu02" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -482,7 +482,7 @@
                 <Property name="text" type="java.lang.String" value="Registros"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel12">
+            <Component class="javax.swing.JLabel" name="usocpu01">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -493,7 +493,7 @@
                 <Property name="text" type="java.lang.String" value="10%"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel14">
+            <Component class="javax.swing.JLabel" name="usocpu02">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -504,7 +504,7 @@
                 <Property name="text" type="java.lang.String" value="70%"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel15">
+            <Component class="javax.swing.JLabel" name="usoAtualCPU">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>

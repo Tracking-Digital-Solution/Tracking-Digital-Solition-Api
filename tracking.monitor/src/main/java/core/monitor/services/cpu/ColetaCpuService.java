@@ -2,12 +2,13 @@ package core.monitor.services.cpu;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.rede.Rede;
+import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
 import core.monitor.services.MaquinaCorporativaService;
 
 import java.time.LocalDateTime;
 
-public class ColetaCpuService implements Ilooca {
+public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 
 	public void executeQueryInsertColetaCpu() {
 		MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
@@ -27,7 +28,12 @@ public class ColetaCpuService implements Ilooca {
 	}
 
 	public void insertColetaCpuDinamico(Integer usoAtual, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer IdCpuDadosEstaicos) {
-		con.update(
+		ITemplateJdbc.con.update(
+				"insert into ColetaCPU " +
+						"values ((?),(?),(?),(?))",
+				usoAtual, dataHora, idMaquinaCorporativa, IdCpuDadosEstaicos
+		);
+		conMySQL.update(
 				"insert into ColetaCPU " +
 						"values ((?),(?),(?),(?))",
 				usoAtual, dataHora, idMaquinaCorporativa, IdCpuDadosEstaicos

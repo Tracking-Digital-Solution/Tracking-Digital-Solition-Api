@@ -187,7 +187,6 @@ public class Login extends javax.swing.JFrame {
                 && validacao.validarLoginMysql(email, senha)) {
             this.dispose();
             new Home().setVisible(true);
-            System.out.println("foi");
         } else {
             System.out.println("Erro ao cadastrar Login");
         }

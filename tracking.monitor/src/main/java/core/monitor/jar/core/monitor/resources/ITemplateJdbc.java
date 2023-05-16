@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public interface ITemplateJdbc {
 	//Conexão banco de dados
 	ConexaoService CONEXAO_SERVICE = new ConexaoService();
-        ConexaoServiceMySQL CONEXAO_SERVICE_MYSQL = new ConexaoServiceMySQL();
 	JdbcTemplate con = CONEXAO_SERVICE.getConexaoDoBanco();
-        JdbcTemplate conMySQL = CONEXAO_SERVICE_MYSQL.getConexaoDoBanco();
+	ConexaoServiceMySQL CONEXAO_SERVICE_MYSQL = new ConexaoServiceMySQL();
+	JdbcTemplate conMySQL = CONEXAO_SERVICE_MYSQL.getConexaoDoBanco();
 }
