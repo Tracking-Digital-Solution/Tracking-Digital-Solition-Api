@@ -33,7 +33,7 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
                 
                 conMySQL.update(
 				"insert into CpuDadosEstaticos " +
-						"values (75,(?))",
+						"values (null,75,(?))",
 				nomeProcessador
 		);
 	}

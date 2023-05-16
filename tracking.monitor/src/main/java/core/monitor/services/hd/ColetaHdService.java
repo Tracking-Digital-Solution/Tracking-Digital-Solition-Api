@@ -40,7 +40,7 @@ public class ColetaHdService implements Ilooca, ITemplateJdbc {
         );
         conMySQL.update(
                "insert into ColetaHd "
-                + "values ((?),(?),(?),(?))",
+                + "values (null,(?),(?),(?),(?))",
                 disponivel, dataHora, idMaquinaCorporativa, idHdDadosEstaticos
         );
      

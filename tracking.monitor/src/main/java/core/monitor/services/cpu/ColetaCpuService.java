@@ -35,7 +35,7 @@ public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 		);
 		conMySQL.update(
 				"insert into ColetaCPU " +
-						"values ((?),(?),(?),(?))",
+						"values (null,(?),(?),(?),(?))",
 				usoAtual, dataHora, idMaquinaCorporativa, IdCpuDadosEstaicos
 		);
 	}

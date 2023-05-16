@@ -40,7 +40,7 @@ public class RamDadosEstaticosService implements Ilooca, ITemplateJdbc {
 
         conMySQL.update(
                "insert into RamDadosEstaticos(riscoRAM, total) "
-                + "values (80,(?))",
+                + "values (null,80,(?))",
                 memoria.getTotal()
         );
        

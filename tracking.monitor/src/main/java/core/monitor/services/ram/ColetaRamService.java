@@ -38,7 +38,7 @@ public class ColetaRamService implements Ilooca, ITemplateJdbc {
         );
         conMySQL.update(
                  "insert into ColetaRAM "
-                + "values ((?),(?),(?),(?),(?))",
+                + "values (null,(?),(?),(?),(?),(?))",
                 disponivel, doubleDisponivel, dataHora, idMaquinaCorporativa, idRamDadosEstaticos
 
         );

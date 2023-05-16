@@ -40,7 +40,7 @@ public class HdDadosEstaticosService implements Ilooca, ITemplateJdbc {
 
         conMySQL.update(
                  "insert into hdDadosEstaticos(riscoHD, tamanho, modelo) "
-                + "values (30,(?),(?))",
+                + "values (null,30,(?),(?))",
                 discoGrupo.getTamanhoTotal(), discoGrupo.getDiscos().get(0).getModelo()
         );
         
