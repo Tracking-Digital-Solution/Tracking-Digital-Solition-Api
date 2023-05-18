@@ -185,8 +185,7 @@ public class Login extends javax.swing.JFrame implements Ilooca {
         String senha = inputSenha.getText();
         Validacao validacao = new Validacao();
 
-        if (validacao.validarLoginAzure(email, senha)
-                && validacao.validarLoginMysql(email, senha)) {
+        if (validacao.validarLoginAzure(email, senha)) {
             this.dispose();
             new Home().setVisible(true);
         } else {
@@ -227,8 +226,7 @@ public class Login extends javax.swing.JFrame implements Ilooca {
                 System.out.println("Digite sua senha\n");
                 String senha = sc.next();
 
-                if (validacao.validarLoginAzure(email, senha)
-                        && validacao.validarLoginMysql(email, senha)) {
+                if (validacao.validarLoginAzure(email, senha)) {
 
                     System.out.println("Logado");
 

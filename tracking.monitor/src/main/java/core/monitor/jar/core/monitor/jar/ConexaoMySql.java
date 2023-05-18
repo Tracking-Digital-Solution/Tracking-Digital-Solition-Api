@@ -13,7 +13,7 @@ public class ConexaoMySql {
     //Configurando a conexão e o acesso
     public ConexaoMySql() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/banco1?useTimezone=true&&serverTimezone=UTC");
         dataSource.setUsername("root");
         dataSource.setPassword("urubu100");
