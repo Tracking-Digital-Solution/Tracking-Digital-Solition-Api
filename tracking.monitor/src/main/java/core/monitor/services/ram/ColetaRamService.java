@@ -6,12 +6,16 @@ import static core.monitor.jar.core.monitor.resources.ITemplateJdbc.conMySQL;
 import core.monitor.repositorio.Ilooca;
 import core.monitor.resources.ITemplateJdbc;
 import core.monitor.services.MaquinaCorporativaService;
+import core.monitor.slack.App;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class ColetaRamService implements Ilooca, ITemplateJdbc {
 
-    public void executeQueryInsertColetaRam() {
+    public void executeQueryInsertColetaRam() throws IOException, InterruptedException{
+        App app = new App();
+
         MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
         Long longUsoAtual = looca.getMemoria().getEmUso();
         Double doubleDisponivel = looca.getMemoria().getDisponivel().doubleValue();
@@ -26,7 +30,7 @@ public class ColetaRamService implements Ilooca, ITemplateJdbc {
                 idHdDadosEstaticos
         );
         System.out.println("Insert coleta RAM: Concluído com êxito");
-
+        app.sendMessageRAM(longUsoAtual);
     }
 
     public void insertColetaRamDinamico(Long disponivel, Double doubleDisponivel, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer idRamDadosEstaticos) {

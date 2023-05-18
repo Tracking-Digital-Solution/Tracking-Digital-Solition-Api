@@ -8,15 +8,19 @@ import core.monitor.repositorio.Ilooca;
 import core.monitor.resources.ITemplateJdbc;
 
 import core.monitor.services.MaquinaCorporativaService;
+import core.monitor.slack.App;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class ColetaHdService implements Ilooca, ITemplateJdbc {
 
-    public void executeQueryInsertColetaHd() {
+    public void executeQueryInsertColetaHd() throws IOException, InterruptedException {
+        App app = new App();
+
         MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
         Long longDisponivelHd = (discoGrupo.getVolumes().get(0).getDisponivel());
         Integer idMaquinaCorporativa = maquinaCorporativaService.returnExpectedIdMaquinaCorporativa();
@@ -29,6 +33,7 @@ public class ColetaHdService implements Ilooca, ITemplateJdbc {
                 idHdDadosEstaticos
         );
         System.out.println("Insert coleta HD: Concluído com êxito");
+        app.sendMessageHD(longDisponivelHd);
 
     }
 

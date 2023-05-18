@@ -5,12 +5,16 @@ import com.github.britooo.looca.api.group.rede.Rede;
 import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
 import core.monitor.services.MaquinaCorporativaService;
+import core.monitor.slack.App;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 
-	public void executeQueryInsertColetaCpu() {
+	public void executeQueryInsertColetaCpu() throws IOException, InterruptedException {
+		App app = new App();
+
 		MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
 		Double doubleUsoAtual = processador.getUso();
 		Integer usoAtual = doubleUsoAtual.intValue();
@@ -24,7 +28,7 @@ public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 				idCpuDadosEstaticos
 		);
 		System.out.println("Insert coleta cpu: Concluído com êxito");
-
+		app.sendMessageCPU(usoAtual);
 	}
 
 	public void insertColetaCpuDinamico(Integer usoAtual, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer IdCpuDadosEstaicos) {
