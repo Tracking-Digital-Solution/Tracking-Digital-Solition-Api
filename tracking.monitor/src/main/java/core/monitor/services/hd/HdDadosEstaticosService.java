@@ -7,6 +7,8 @@ package core.monitor.services.hd;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
+import core.monitor.services.MaquinaCorporativaService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.net.InetAddress;
@@ -24,24 +26,28 @@ public class HdDadosEstaticosService implements Ilooca, ITemplateJdbc {
                 insertHdDadosEstaticos();
                 System.out.println("Dados Estáticos Inseridos");
             }
-        } catch (IllegalStateException | UnknownHostException e) {
+        } catch (DuplicateKeyException | IllegalStateException | UnknownHostException e) {
             System.out.println("Dados estaticos dessa máquina já existem!");
         }
 
     }
 
     private void insertHdDadosEstaticos() {
-
+        MaquinaCorporativaService mcs = new MaquinaCorporativaService();
         ITemplateJdbc.con.update(
-                 "insert into hdDadosEstaticos(riscoHD, tamanho, modelo) "
-                + "values (30,(?),(?))",
-                discoGrupo.getTamanhoTotal(), discoGrupo.getDiscos().get(0).getModelo()
+                 "insert into hdDadosEstaticos "
+                + "values ((?),30,(?),(?))",
+                mcs.returnExpectedIdMaquinaCorporativa()
+                , discoGrupo.getDiscos().get(0).getModelo()
+                ,discoGrupo.getTamanhoTotal()
         );
 
         conMySQL.update(
-                 "insert into hdDadosEstaticos(riscoHD, tamanho, modelo) "
-                + "values (null,30,(?),(?))",
-                discoGrupo.getTamanhoTotal(), discoGrupo.getDiscos().get(0).getModelo()
+                 "insert into hdDadosEstaticos "
+                + "values ((?),30,(?),(?))",
+                mcs.returnExpectedIdMaquinaCorporativa()
+                , discoGrupo.getDiscos().get(0).getModelo()
+                ,discoGrupo.getTamanhoTotal()
         );
         
     }

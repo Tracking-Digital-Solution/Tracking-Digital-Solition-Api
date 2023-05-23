@@ -4,6 +4,8 @@ import core.monitor.entidades.cpu.CpuDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
+import core.monitor.services.MaquinaCorporativaService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.net.InetAddress;
@@ -15,26 +17,27 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 	public void executeQueryInsertCpuDadosEstaticos() {
 		try {
 			if (!(returnNameMachineByDatabase().equals(getSystemName()))) {
-				insertCpuDadosEstaticos(processador.getNome());
+				MaquinaCorporativaService mcs = new MaquinaCorporativaService();
+				insertCpuDadosEstaticos(processador.getNome(), mcs.returnExpectedIdMaquinaCorporativa());
 				System.out.println("Dados Estáticos Inseridos");
 			}
-		} catch (IllegalStateException | UnknownHostException e) {
+		} catch (DuplicateKeyException | IllegalStateException | UnknownHostException e) {
 			System.out.println("Dados estaticos dessa máquina já existem!");
 		}
 
 	}
 
-	private void insertCpuDadosEstaticos(String nomeProcessador) {
+	private void insertCpuDadosEstaticos(String nomeProcessador, Integer idMaquina) {
 		ITemplateJdbc.con.update(
 				"insert into CpuDadosEstaticos " +
-						"values (75,(?))",
-				nomeProcessador
+						"values ((?),75,(?))",
+				idMaquina,nomeProcessador
 		);
                 
                 conMySQL.update(
 				"insert into CpuDadosEstaticos " +
-						"values (null,75,(?))",
-				nomeProcessador
+						"values ((?),75,(?))",
+				idMaquina,nomeProcessador
 		);
 	}
 	public String returnNameMachineByDatabase() throws UnknownHostException {

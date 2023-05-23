@@ -7,6 +7,8 @@ package core.monitor.services.ram;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
+import core.monitor.services.MaquinaCorporativaService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.net.InetAddress;
@@ -24,24 +26,27 @@ public class RamDadosEstaticosService implements Ilooca, ITemplateJdbc {
                 insertRamDadosEstaticos();
                 System.out.println("Dados Estáticos Inseridos");
             }
-        } catch (IllegalStateException | UnknownHostException e) {
+        } catch (DuplicateKeyException | UnknownHostException e) {
             System.out.println("Dados estaticos dessa máquina já existem!");
         }
 
     }
 
     private void insertRamDadosEstaticos() {
+        MaquinaCorporativaService mcs = new MaquinaCorporativaService();
 
         ITemplateJdbc.con.update(
-                "insert into RamDadosEstaticos(riscoRAM, total) "
-                + "values (80,(?))",
-                memoria.getTotal()
+                "insert into RamDadosEstaticos "
+                + "values ((?),80,(?))",
+                mcs.returnExpectedIdMaquinaCorporativa()
+                ,memoria.getTotal()
         );
 
         conMySQL.update(
-               "insert into RamDadosEstaticos(riscoRAM, total) "
-                + "values (null,80,(?))",
-                memoria.getTotal()
+               "insert into RamDadosEstaticos "
+                + "values ((?),80,(?))",
+                mcs.returnExpectedIdMaquinaCorporativa()
+                ,memoria.getTotal()
         );
        
     }
