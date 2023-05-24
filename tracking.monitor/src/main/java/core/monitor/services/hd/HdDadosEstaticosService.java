@@ -4,6 +4,8 @@
  */
 package core.monitor.services.hd;
 
+import core.monitor.entidades.cpu.CpuDadosEstaticos;
+import core.monitor.entidades.hd.HdDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
@@ -25,6 +27,8 @@ public class HdDadosEstaticosService implements Ilooca, ITemplateJdbc {
             if (!(returnNameMachineByDatabase().equals(getSystemName()))) {
                 insertHdDadosEstaticos();
                 System.out.println("Dados Estáticos Inseridos");
+            }else{
+                insertStaticDataMysql();
             }
         } catch (DuplicateKeyException | IllegalStateException | UnknownHostException e) {
             System.out.println("Dados estaticos dessa máquina já existem!");
@@ -72,6 +76,34 @@ public class HdDadosEstaticosService implements Ilooca, ITemplateJdbc {
         return systemName;
     }
 
+    public void insertStaticDataMysql() throws UnknownHostException {
+        try{
+            List<HdDadosEstaticos> listaDadosEstaticosHDAzure = ITemplateJdbc.con.query(
+                    "select ce.* from MaquinaCorporativa mc " +
+                            "INNER JOIN ColetaHD cc on mc.idMaquinaCorporativa = cc.idHd " +
+                            "INNER JOIN HdDadosEstaticos ce on cc.idHd = ce.idHdDadosEstaticos " +
+                            "where mc.nomeMaquina = '" + getSystemName() + "'",
+                    new BeanPropertyRowMapper<>(HdDadosEstaticos.class)
+            );
+
+            List<HdDadosEstaticos> listaDadosEstaticosHD = conMySQL.query(
+                    "select ce.* from MaquinaCorporativa mc " +
+                            "INNER JOIN ColetaHD cc on mc.idMaquinaCorporativa = cc.idHd " +
+                            "INNER JOIN HdDadosEstaticos ce on cc.idHd = ce.idHdDadosEstaticos " +
+                            "where mc.nomeMaquina = '" + getSystemName() + "'",
+                    new BeanPropertyRowMapper<>(HdDadosEstaticos.class)
+            );
+            if (listaDadosEstaticosHD.isEmpty()){
+                conMySQL.update("INSERT INTO HdDadosEstaticos values " +
+                                "((?),30,(?),(?))",
+                        listaDadosEstaticosHDAzure.get(0).getIdHdDadosEstaticos()
+                        , discoGrupo.getDiscos().get(0).getModelo()
+                        ,discoGrupo.getTamanhoTotal());
+            }
+        }catch (DuplicateKeyException e){
+            System.out.println("Dados Estaticos Atualizados Localmente");
+        }
+    }
     @Override
     public String getIp() {
         return null;

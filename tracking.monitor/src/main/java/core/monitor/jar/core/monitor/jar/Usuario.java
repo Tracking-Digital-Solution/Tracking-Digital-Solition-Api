@@ -1,29 +1,41 @@
 package core.monitor.jar.core.monitor.jar;
 
 public class Usuario {
-    private Integer id; 
+
+    private Integer idPerfil; 
     private String nome;
     private String cpf;
     private String email;
     private String senha;
-    private String cargo;
+    private Integer perfilAdministrador;
 
-    public Integer getId() {
-        return id;
+
+    public Usuario(Integer id, String nome, String email, String senha ,String cpf, Integer perfilAdministrador) {
+        this.idPerfil = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.perfilAdministrador = perfilAdministrador;
     }
 
-    public String getCargo() {
-        return cargo;
+    public Usuario() {
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public Integer getIdPerfil() {
+        return idPerfil;
     }
-    
-    
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getPerfilAdministrador() {
+        return perfilAdministrador;
+    }
+
+    public void setPerfilAdministrador(Integer perfilAdministrador) {
+        this.perfilAdministrador = perfilAdministrador;
+    }
+
+    public void setIdPerfil(Integer idPerfil) {
+        this.idPerfil = idPerfil;
     }
 
     public String getNome() {
@@ -47,7 +59,7 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        this.email = "oo";
+        this.email = email;
     }
 
     public String getSenha() {
@@ -60,8 +72,13 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "\nUsuario{" + "id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha + '}';
+        return "\nUsuario:\n" +
+                "id: " + idPerfil +
+                "\n nome: '" + nome + '\'' +
+                "\n cpf: '" + cpf + '\'' +
+                "\n email: '" + email + '\'' +
+                "\n senha: '" + senha + '\'' +
+                "\n cargo: " + perfilAdministrador +
+                '\n';
     }
-    
-    
 }

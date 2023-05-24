@@ -4,7 +4,9 @@
  */
 package core.monitor.services.ram;
 
+import core.monitor.entidades.hd.HdDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
+import core.monitor.entidades.memoria.RamDadosEstaticos;
 import core.monitor.jar.core.monitor.resources.ITemplateJdbc;
 import core.monitor.repositorio.Ilooca;
 import core.monitor.services.MaquinaCorporativaService;
@@ -25,6 +27,8 @@ public class RamDadosEstaticosService implements Ilooca, ITemplateJdbc {
             if (!(returnNameMachineByDatabase().equals(getSystemName()))) {
                 insertRamDadosEstaticos();
                 System.out.println("Dados Estáticos Inseridos");
+            }else{
+                insertStaticDataMysql();
             }
         } catch (DuplicateKeyException | UnknownHostException e) {
             System.out.println("Dados estaticos dessa máquina já existem!");
@@ -69,6 +73,37 @@ public class RamDadosEstaticosService implements Ilooca, ITemplateJdbc {
     private String getSystemName() throws UnknownHostException {
         String systemName = InetAddress.getLocalHost().getHostName();
         return systemName;
+    }
+
+    public void insertStaticDataMysql() throws UnknownHostException {
+        try{
+            List<RamDadosEstaticos> listaDadosEstaticosRamAzure = ITemplateJdbc.con.query(
+                    "select ce.* from MaquinaCorporativa mc " +
+                            "INNER JOIN ColetaRAM cc on mc.idMaquinaCorporativa = cc.idRam " +
+                            "INNER JOIN RamDadosEstaticos ce on cc.idRam = ce.idRamDadosEstaticos " +
+                            "where mc.nomeMaquina = '" + getSystemName() + "'",
+                    new BeanPropertyRowMapper<>(RamDadosEstaticos.class)
+            );
+
+            List<RamDadosEstaticos> listaDadosEstaticosRam = conMySQL.query(
+                    "select ce.* from MaquinaCorporativa mc " +
+                            "INNER JOIN ColetaRAM cc on mc.idMaquinaCorporativa = cc.idRam " +
+                            "INNER JOIN RamDadosEstaticos ce on cc.idRam = ce.idRamDadosEstaticos " +
+                            "where mc.nomeMaquina = ?",
+                    new BeanPropertyRowMapper<>(RamDadosEstaticos.class),
+                    getSystemName()
+            );
+            if (listaDadosEstaticosRam.isEmpty()){
+                conMySQL.update(
+                        "insert into RamDadosEstaticos "
+                                + "values ((?),80,(?))",
+                        listaDadosEstaticosRamAzure.get(0).getIdRamDadosEstaticos()
+                        ,memoria.getTotal()
+                );
+            }
+        }catch (DuplicateKeyException e){
+            System.out.println("Dados Estaticos Atualizados Localmente");
+        }
     }
 
     @Override

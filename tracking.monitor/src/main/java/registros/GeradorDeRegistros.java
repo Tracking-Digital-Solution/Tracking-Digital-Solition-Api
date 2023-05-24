@@ -48,12 +48,10 @@ public class GeradorDeRegistros implements Ilooca {
             try {
                 // Gravar novo registro no arquivo; não verifica se entrada é válida.
                 arquivoCriado.format(
-                        "Dados de CPU: %.2f \n" +
-                        "Dados de Memória: %d \n" +
-                        "Dados de HDD: %d",
-                        looca.getProcessador().getUso()
-                        ,looca.getMemoria().getEmUso()
-                        ,looca.getGrupoDeDiscos().getQuantidadeDeVolumes()
+                        "Usuario: %s \n" +
+                        "Data de login: %s \n" +
+                        ""
+
                 );
 //                try {
 //                    Thread.sleep(intervalo);

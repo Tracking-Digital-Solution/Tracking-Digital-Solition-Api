@@ -4,8 +4,12 @@
  */
 package core.monitor.jar.core.monitor.jar;
 
+import core.monitor.MonitorApp;
 import core.monitor.jar.core.monitor.jar.validacao.Validacao;
+import core.monitor.repositorio.Ilooca;
+import core.monitor.services.MaquinaCorporativaService;
 
+import javax.management.monitor.Monitor;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
@@ -13,7 +17,7 @@ import java.util.Scanner;
  *
  * @author gabsm
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame implements Ilooca {
 
     /**
      * Creates new form JarExecutavel
@@ -183,8 +187,7 @@ public class Login extends javax.swing.JFrame {
         String senha = inputSenha.getText();
         Validacao validacao = new Validacao();
 
-        if (validacao.validarLoginAzure(email, senha)
-                && validacao.validarLoginMysql(email, senha)) {
+        if (validacao.validarLoginAzure(email, senha)) {
             this.dispose();
             new Home().setVisible(true);
         } else {
@@ -225,10 +228,27 @@ public class Login extends javax.swing.JFrame {
                 System.out.println("Digite sua senha\n");
                 String senha = sc.next();
 
-                if (validacao.validarLoginAzure(email, senha)
-                        && validacao.validarLoginMysql(email, senha)) {
+                if (validacao.validarLoginAzure(email, senha)) {
+                    MaquinaCorporativaService MCS = new MaquinaCorporativaService();
+                    MCS.inserirMaquinaBancoMysql(validacao.returnIdPerfil(email,senha));
 
                     System.out.println("Logado");
+
+                    System.out.println("---------- TRACKING MONITOR ---------\n\n");
+                    System.out.println("INFORMAÇÕES DO SISTEMA\n");
+                    System.out.println(sistema);
+                    System.out.println("INFORMAÇÕES DO PROCESSADOR\n");
+                    System.out.println(processador);
+                    System.out.println("INFORMAÇÕES DA REDE\n");
+                    System.out.println(rede.getGrupoDeInterfaces().getInterfaces());
+                    System.out.println("INFORMAÇÕES DE MEMÓRIA\n");
+                    System.out.println(memoria);
+                    System.out.println("INFORMAÇÕES DE DISCO\n\n");
+                    System.out.println(discoGrupo.getDiscos());
+                    System.out.println("------------------------------------");
+
+                    MonitorApp monitorApp = new MonitorApp();
+                    monitorApp.main(null);
                 } else {
                     System.out.println("Email ou senha errados");
                 }
@@ -262,5 +282,10 @@ public class Login extends javax.swing.JFrame {
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
+
+    @Override
+    public String getIp() {
+        return null;
+    }
     // End of variables declaration//GEN-END:variables
 }

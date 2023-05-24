@@ -20,7 +20,10 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 				MaquinaCorporativaService mcs = new MaquinaCorporativaService();
 				insertCpuDadosEstaticos(processador.getNome(), mcs.returnExpectedIdMaquinaCorporativa());
 				System.out.println("Dados Estáticos Inseridos");
+			}else{
+				insertStaticDataMysql(processador.getNome());
 			}
+
 		} catch (DuplicateKeyException | IllegalStateException | UnknownHostException e) {
 			System.out.println("Dados estaticos dessa máquina já existem!");
 		}
@@ -33,7 +36,7 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 						"values ((?),75,(?))",
 				idMaquina,nomeProcessador
 		);
-                
+
                 conMySQL.update(
 				"insert into CpuDadosEstaticos " +
 						"values ((?),75,(?))",
@@ -57,7 +60,34 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
                 
 	}
         
-        
+        public void insertStaticDataMysql(String nomeProcessador) throws UnknownHostException {
+			try{
+				List<CpuDadosEstaticos> listaDadosEstaticosCPUAzure = ITemplateJdbc.con.query(
+						"select ce.* from MaquinaCorporativa mc " +
+								"INNER JOIN ColetaCPU cc on mc.idMaquinaCorporativa = cc.idCPU " +
+								"INNER JOIN CpuDadosEstaticos ce on cc.idCPU = ce.idCpuDadosEstaticos " +
+								"where mc.nomeMaquina = '" + getSystemName() + "'",
+						new BeanPropertyRowMapper<>(CpuDadosEstaticos.class)
+				);
+
+				List<CpuDadosEstaticos> listaDadosEstaticosCPU = conMySQL.query(
+						"select ce.* from MaquinaCorporativa mc " +
+								"INNER JOIN ColetaCPU cc on mc.idMaquinaCorporativa = cc.idCPU " +
+								"INNER JOIN CpuDadosEstaticos ce on cc.idCPU = ce.idCpuDadosEstaticos " +
+								"where mc.nomeMaquina = '" + getSystemName() + "'",
+						new BeanPropertyRowMapper<>(CpuDadosEstaticos.class)
+				);
+				if (listaDadosEstaticosCPU.isEmpty()){
+					conMySQL.update("INSERT INTO CpuDadosEstaticos values " +
+									"((?), 75, (?))",
+							listaDadosEstaticosCPUAzure.get(0).getIdCpuDadosEstaticos(), nomeProcessador);
+				}
+			}catch (DuplicateKeyException e){
+				System.out.println("Dados Estaticos Atualizados Localmente");
+			}
+		}
+
+
 
 	private String getSystemName() throws UnknownHostException {
 		String systemName = InetAddress.getLocalHost().getHostName();
