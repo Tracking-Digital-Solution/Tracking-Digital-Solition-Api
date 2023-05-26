@@ -15,7 +15,7 @@ import static core.monitor.jar.core.monitor.resources.ITemplateJdbc.conMySQL;
 
 public class MaquinaCorporativaService implements Ilooca {
 
-	private static String getSystemName() throws UnknownHostException {
+	public static String getSystemName() throws UnknownHostException {
 		String systemName = InetAddress.getLocalHost().getHostName();
 		return systemName;
 	}

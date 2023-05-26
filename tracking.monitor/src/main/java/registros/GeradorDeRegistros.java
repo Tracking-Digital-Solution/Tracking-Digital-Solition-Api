@@ -1,13 +1,18 @@
 package registros;
 
-import core.monitor.repositorio.Ilooca;
+import core.monitor.entidades.cpu.CpuDadosEstaticos;
+import core.monitor.entidades.hd.HdDadosEstaticos;
+import core.monitor.entidades.memoria.RamDadosEstaticos;
+import core.monitor.resources.ITemplateJdbc;
 
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class GeradorDeRegistros implements Ilooca {
-
+public class GeradorDeRegistros implements ITemplateJdbc {
+    GravadorService gravadorService = new GravadorService();
     private static Formatter arquivoCriado; // envia texto para um arquivo
 
     public static void main(String[] args) {
@@ -38,9 +43,12 @@ public class GeradorDeRegistros implements Ilooca {
 
     // Método para adicionar registros ao arquivo
     public static void adicionarDados() {
-        Scanner entrada = new Scanner(System.in);
-        System.out.printf("%s%n", "Entre com o código do produto e nome do item para cadastro:");
+        GravadorService gravadorService = new GravadorService();
         Calendar cal = Calendar.getInstance();
+        Integer riscoAnteriosCPU = 0;
+        Integer riscoAnteriosHD = 0;
+        Integer riscoAnteriosRAM = 0;
+
         int horaAtual = cal.get(Calendar.HOUR_OF_DAY);
         long intervalo = 3600000;
         System.out.println(horaAtual);
@@ -48,16 +56,18 @@ public class GeradorDeRegistros implements Ilooca {
             try {
                 // Gravar novo registro no arquivo; não verifica se entrada é válida.
                 arquivoCriado.format(
-                        "Usuario: %s \n" +
-                        "Data de login: %s \n" +
-                        ""
-
+                        "-----------------------\n" +
+                        "Ultimo Registro Estatico de CPU\n" +
+                        "Dados de CPU: %.2f \n\n" +
+                        "Ultimo Registro Estatico de CPU \n" +
+                        "Dados de Memória: %d \n\n" +
+                        "Ultimo Registro Estatico de CPU\n" +
+                        "Dados de HDD: %d\n\n" +
+                        gravadorService.getRiscoCPU().getRiscoCPU(),
+                        gravadorService.getRiscoRAM().getRiscoRam(),
+                        gravadorService.getRiscoHD().getRiscoHd()
                 );
-//                try {
-//                    Thread.sleep(intervalo);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+
                 break;
             } catch (FormatterClosedException formatterClosedException) {
                 System.err.println("Erro ao escrever no arquivo. Finalizando.");
@@ -65,6 +75,8 @@ public class GeradorDeRegistros implements Ilooca {
             } catch (NoSuchElementException elementException) {
                 System.err.println("Entrada inválida. Tente novamente.");
 //                entrada.nextLine(); // Descartar a entrada para que o usuário possa tentar de novo
+            } catch (UnknownHostException e) {
+                throw new RuntimeException(e);
             }
             System.out.print("Entre com o próximo código e item:\n");
         } // Fim do laço while
@@ -77,10 +89,5 @@ public class GeradorDeRegistros implements Ilooca {
         }
     }
 
-
-    @Override
-    public String getIp() {
-        return null;
-    }
 } // Fim da classe CriarArquivoTexto
 
