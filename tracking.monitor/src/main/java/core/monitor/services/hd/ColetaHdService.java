@@ -39,12 +39,12 @@ public class ColetaHdService implements Ilooca, ITemplateJdbc {
 
     public void insertColetaHdDinamico(Long disponivel, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer idHdDadosEstaticos) {
         ITemplateJdbc.con.update(
-                "insert into ColetaHd "
+                "insert into ColetaHD "
                 + "values ((?),(?),(?),(?))",
                 disponivel, dataHora, idMaquinaCorporativa, idHdDadosEstaticos
         );
         conMySQL.update(
-               "insert into ColetaHd "
+               "insert into ColetaHD "
                 + "values (null,(?),(?),(?),(?))",
                 disponivel, dataHora, idMaquinaCorporativa, idHdDadosEstaticos
         );

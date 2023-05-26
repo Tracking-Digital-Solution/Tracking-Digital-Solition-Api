@@ -17,8 +17,6 @@ public class GeradorDeRegistros implements ITemplateJdbc {
 
     public static void main(String[] args) {
         abrirArquivo();
-        adicionarDados();
-        fecharArquivo();
     }
 
     // Método para abrir (ou criar) o arquivo arquivo.txt
@@ -30,8 +28,9 @@ public class GeradorDeRegistros implements ITemplateJdbc {
         String nomeArquivo = "Logs-" + formato.format(dataSistema) + ".txt";
 
         try {
-            arquivoCriado = new Formatter(nomeArquivo); // Abrir o arquivo
-            System.out.println("Arquivo criado: " + nomeArquivo);
+            //TODO: FAZER ARQUIVO ABRIR O EXISTENTE E N FICAR CRIANDO OUTRO IGUAL
+            arquivoCriado = new Formatter(nomeArquivo);// Abrir o arquivo
+            adicionarDados();
         } catch (SecurityException securityException) {
             System.err.println("Não é possível escrever no arquivo. Finalizando.");
             System.exit(1); // terminar o programa
@@ -52,17 +51,18 @@ public class GeradorDeRegistros implements ITemplateJdbc {
         int horaAtual = cal.get(Calendar.HOUR_OF_DAY);
         long intervalo = 3600000;
         System.out.println(horaAtual);
+        //TODO: PENSAR EM ALGUMA MANEIRA DE FAZER ESSE LAÇO SE REPEDIR A CADA 5 MIN E N SOBREESCREVER OS DADOS EXISTENTES
         for(int i = 0; i < 10 ; i++) { // iterar até que seja encontrado o marcador de fim-de-arquivo
             try {
                 // Gravar novo registro no arquivo; não verifica se entrada é válida.
                 arquivoCriado.format(
                         "-----------------------\n" +
                         "Ultimo Registro Estatico de CPU\n" +
-                        "Dados de CPU: %.2f \n\n" +
+                        "Dados de CPU: %d \n\n" +
                         "Ultimo Registro Estatico de CPU \n" +
                         "Dados de Memória: %d \n\n" +
                         "Ultimo Registro Estatico de CPU\n" +
-                        "Dados de HDD: %d\n\n" +
+                        "Dados de HDD: %d\n\n" ,
                         gravadorService.getRiscoCPU().getRiscoCPU(),
                         gravadorService.getRiscoRAM().getRiscoRam(),
                         gravadorService.getRiscoHD().getRiscoHd()
@@ -79,7 +79,8 @@ public class GeradorDeRegistros implements ITemplateJdbc {
                 throw new RuntimeException(e);
             }
             System.out.print("Entre com o próximo código e item:\n");
-        } // Fim do laço while
+        }
+        fecharArquivo();// Fim do laço while
     } // Fim do método adicionarDados
 
     // Método para fechar o arquivo

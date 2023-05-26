@@ -39,7 +39,7 @@ public class HdDadosEstaticosService implements Ilooca, ITemplateJdbc {
     private void insertHdDadosEstaticos() {
         MaquinaCorporativaService mcs = new MaquinaCorporativaService();
         ITemplateJdbc.con.update(
-                 "insert into hdDadosEstaticos "
+                 "insert into HdDadosEstaticos "
                 + "values ((?),30,(?),(?))",
                 mcs.returnExpectedIdMaquinaCorporativa()
                 , discoGrupo.getDiscos().get(0).getModelo()
@@ -47,7 +47,7 @@ public class HdDadosEstaticosService implements Ilooca, ITemplateJdbc {
         );
 
         conMySQL.update(
-                 "insert into hdDadosEstaticos "
+                 "insert into HdDadosEstaticos "
                 + "values ((?),30,(?),(?))",
                 mcs.returnExpectedIdMaquinaCorporativa()
                 , discoGrupo.getDiscos().get(0).getModelo()
