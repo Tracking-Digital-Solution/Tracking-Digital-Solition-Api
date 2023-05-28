@@ -47,7 +47,7 @@ public class Validacao {
                     new BeanPropertyRowMapper<>(Usuario.class));
             Usuario usuario = listaUsuario.get(0);
             conMySQL.update(
-                    "INSERT INTO Perfil VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO Perfil VALUES (?, ?, ?, ?, ?, null)",
                     usuario.getIdPerfil(),
                     usuario.getNome(),
                     usuario.getEmail(),
