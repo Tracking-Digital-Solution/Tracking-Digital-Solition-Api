@@ -45,4 +45,11 @@ public class CpuDadosEstaticos {
 	public void setNomeProcessador(String nomeProcessador) {
 		this.nomeProcessador = nomeProcessador;
 	}
+
+	@Override
+	public String toString() {
+		return 	"\nID: " + idCpuDadosEstaticos +
+				"\nAlerta de risco em: " + riscoCPU + "%" +
+				"\nNome do Processador: " + nomeProcessador + "\n\n";
+	}
 }

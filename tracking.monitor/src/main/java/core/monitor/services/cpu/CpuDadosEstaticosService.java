@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
+	private Integer qtdListaCpuDadosEstaticos;
 
 	public void executeQueryInsertCpuDadosEstaticos() {
 		try {
@@ -42,6 +43,7 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 						"values ((?),75,(?))",
 				idMaquina,nomeProcessador
 		);
+				qtdListaCpuDadosEstaticos++;
 	}
 	public String returnNameMachineByDatabase() throws UnknownHostException {
 		try {
@@ -85,9 +87,13 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 			}catch (DuplicateKeyException e){
 				System.out.println("Dados Estaticos Atualizados Localmente");
 			}
+
 		}
 
 
+	public Integer getQtdListaCpuDadosEstaticos() {
+		return qtdListaCpuDadosEstaticos;
+	}
 
 	private String getSystemName() throws UnknownHostException {
 		String systemName = InetAddress.getLocalHost().getHostName();
@@ -98,4 +104,5 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 	public String getIp() {
 		return null;
 	}
+
 }

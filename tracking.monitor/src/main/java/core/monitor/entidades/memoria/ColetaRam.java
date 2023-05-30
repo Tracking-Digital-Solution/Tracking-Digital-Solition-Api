@@ -64,4 +64,16 @@ public class ColetaRam {
     public Double getDisponivel() {
         return disponivel;
     }
+
+    @Override
+    public String toString() {
+        return "ColetaRam{" +
+                "idRam=" + idRam +
+                ", usoAtual=" + usoAtual +
+                ", disponivel=" + disponivel +
+                ", maquinaCorporativa=" + maquinaCorporativa +
+                ", dataHora=" + dataHora +
+                ", ramDadosEstaticos=" + ramDadosEstaticos +
+                '}';
+    }
 }

@@ -42,7 +42,9 @@ public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 						"values (null,(?),(?),(?),(?))",
 				usoAtual, dataHora, idMaquinaCorporativa, IdCpuDadosEstaicos
 		);
+
 	}
+
 
 	@Override
 	public String getIp() {

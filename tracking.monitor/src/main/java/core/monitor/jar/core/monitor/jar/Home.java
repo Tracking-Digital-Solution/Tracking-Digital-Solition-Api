@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.String.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -23,6 +25,8 @@ import static java.lang.String.*;
  */
 public class Home extends javax.swing.JFrame implements Ilooca {
 
+     private static Integer contador = 0;
+    
     /**
      * Creates new form Home
      */
@@ -481,9 +485,19 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Home().setVisible(true);
+                    Home home = new Home();
+                    home.setVisible(true);
                     MonitorApp monitorApp = new MonitorApp();
                     monitorApp.main(null);
+                    
+                    Timer  timer = new Timer();
+                     timer.scheduleAtFixedRate(new TimerTask() {
+                        @Override
+                        public void run() {
+                           home.usoAtualCPU.setText("" + contador++);
+                        }
+                    }, 0, 1000);
+                    
                 } catch (UnknownHostException e) {
                     throw new RuntimeException(e);
                 }
@@ -525,6 +539,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     private javax.swing.JLabel usoram02;
     // End of variables declaration//GEN-END:variables
 
+    
     @Override
     public String getIp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

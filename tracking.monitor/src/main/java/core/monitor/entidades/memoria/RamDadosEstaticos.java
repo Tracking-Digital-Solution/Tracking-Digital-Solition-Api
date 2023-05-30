@@ -46,11 +46,15 @@ public class RamDadosEstaticos {
         this.riscoRam = riscoRam;
     }
 
-    public BigInteger getTotal() {
-        return total;
-    }
+    public BigInteger getTotal() {return total;}
 
     public void setTotal(BigInteger total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return  "\nID :" + idRamDadosEstaticos +
+                "\nAlerta de risco em: " + riscoRam + "%\n\n";
     }
 }

@@ -56,5 +56,9 @@ public class HdDadosEstaticos {
         return listaColetaCpu;
     }
 
-
+    @Override
+    public String toString() {
+        return "\nID: " + idHdDadosEstaticos +
+                "\nAlerta de risco em: " + riscoHd + "%\n\n";
+    }
 }

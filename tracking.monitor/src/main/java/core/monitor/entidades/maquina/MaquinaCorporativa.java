@@ -61,4 +61,15 @@ public class MaquinaCorporativa {
 	public void setNomeMaquina(String nomeMaquina) {
 		this.nomeMaquina = nomeMaquina;
 	}
+
+	@Override
+	public String toString() {
+		return "MaquinaCorporativa{" +
+				"idMaquinaCorporativa=" + idMaquinaCorporativa +
+				", ip='" + ip + '\'' +
+				", sistemaOperacional='" + sistemaOperacional + '\'' +
+				", nomeMaquina='" + nomeMaquina + '\'' +
+				", listaColetaCpu=" + listaColetaCpu +
+				'}';
+	}
 }

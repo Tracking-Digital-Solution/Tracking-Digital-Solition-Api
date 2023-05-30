@@ -4,6 +4,7 @@ import core.monitor.entidades.cpu.CpuDadosEstaticos;
 import core.monitor.entidades.hd.HdDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.entidades.memoria.RamDadosEstaticos;
+import core.monitor.repositorio.Ilooca;
 import core.monitor.resources.ITemplateJdbc;
 
 import java.io.File;
@@ -15,12 +16,11 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class GeradorDeRegistros implements ITemplateJdbc {
+public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
 
     public void gerarLog(MaquinaCorporativa maquinaCorporativa) {
-    CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos();
-    HdDadosEstaticos hdDadosEstaticos = new HdDadosEstaticos();
-    RamDadosEstaticos ramDadosEstaticos = new RamDadosEstaticos();
+        GravadorService gravadorService = new GravadorService();
+
 
         // ferramenta que gera os logs
         Logger logger = Logger.getLogger("MyLog");
@@ -67,10 +67,10 @@ public class GeradorDeRegistros implements ITemplateJdbc {
 
             // the following statement is used to log any messages
             logger.info(
-                    "\nNome da maquina do Usuário: " + maquinaCorporativa.getNomeMaquina()
-                            + "\nCPU: " + cpuDadosEstaticos.getRiscoCPU()
-                            + "\nHD: " + hdDadosEstaticos.getRiscoHd()
-                            + "\nRam: " + ramDadosEstaticos.getRiscoRam()
+                    "\nNome da maquina do Usuário: " + rede.getParametros().getHostName()
+                            + "\nCPU: " + gravadorService.getListRiscoCPU().get(gravadorService.getListRiscoCPU().size() - 1).toString()
+                            + "\nHD: " +  gravadorService.getListRiscoHD().get(gravadorService.getListRiscoHD().size() - 1)
+                            + "\nRam: " + gravadorService.getListRiscoRAM().get(gravadorService.getListRiscoRAM().size() - 1)
             );
 
         } catch (SecurityException e) {
@@ -82,4 +82,8 @@ public class GeradorDeRegistros implements ITemplateJdbc {
     }
 
 
+    @Override
+    public String getIp() {
+        return null;
+    }
 } // Fim da classe CriarArquivoTexto
