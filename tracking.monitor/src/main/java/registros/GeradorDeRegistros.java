@@ -2,93 +2,84 @@ package registros;
 
 import core.monitor.entidades.cpu.CpuDadosEstaticos;
 import core.monitor.entidades.hd.HdDadosEstaticos;
+import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.entidades.memoria.RamDadosEstaticos;
 import core.monitor.resources.ITemplateJdbc;
 
-import java.io.FileNotFoundException;
-import java.math.BigInteger;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class GeradorDeRegistros implements ITemplateJdbc {
-    GravadorService gravadorService = new GravadorService();
-    private static Formatter arquivoCriado; // envia texto para um arquivo
 
-    public static void main(String[] args) {
-        abrirArquivo();
-    }
+    public void gerarLog(MaquinaCorporativa maquinaCorporativa) {
+    CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos();
+    HdDadosEstaticos hdDadosEstaticos = new HdDadosEstaticos();
+    RamDadosEstaticos ramDadosEstaticos = new RamDadosEstaticos();
 
-    // Método para abrir (ou criar) o arquivo arquivo.txt
-    public static void abrirArquivo() {
-        Date dataSistema = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        // ferramenta que gera os logs
+        Logger logger = Logger.getLogger("MyLog");
 
-        //Logs-12-05-2023.txt
-        String nomeArquivo = "Logs-" + formato.format(dataSistema) + ".txt";
+        // gerenciador de arquivos
+        FileHandler fh;
+
+        // pega o horario atual e seta o horario dele
+        LocalDateTime getCurrentTime = LocalDateTime.now();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH'h'mm'm'ss's'");
+        String currentTime = getCurrentTime.format(timeFormatter);
+
+
+        //pega a data
+        LocalDate getCurrentDate = LocalDate.now();
+        Integer year = getCurrentDate.getYear();
+        Integer month = getCurrentDate.getMonthValue();
+        Integer day = getCurrentDate.getDayOfMonth();
+        String currentDate = String.format("%d-%d-%d", day, month, year);
+
+        //prefixo da log
+        String logDirectory = "logs";
+
+        //cria o path das logs por data
+        File directory = new File(logDirectory + File.separator + currentDate);
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        //nome da nova log
+        String fileName = "TrackingLogs " + currentDate + " - " + currentTime + ".log";
 
         try {
-            //TODO: FAZER ARQUIVO ABRIR O EXISTENTE E N FICAR CRIANDO OUTRO IGUAL
-            arquivoCriado = new Formatter(nomeArquivo);// Abrir o arquivo
-            adicionarDados();
-        } catch (SecurityException securityException) {
-            System.err.println("Não é possível escrever no arquivo. Finalizando.");
-            System.exit(1); // terminar o programa
-        } catch (FileNotFoundException fileNotFoundException) {
-            System.err.println("Erro ao abrir o arquivo. Finalizando.");
-            System.exit(1); // Finalizar o programa
+            // This block configure the logger with handler and formatter
+            //iDENTIFICA pasta chamada ~logs/date~ e cria o novo arquivo dentro dela
+            String logFileSeparator = "logs" + File.separator + currentDate + File.separator + fileName;
+
+            fh = new FileHandler(logFileSeparator);
+
+            logger.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+
+            // the following statement is used to log any messages
+            logger.info(
+                    "\nNome da maquina do Usuário: " + maquinaCorporativa.getNomeMaquina()
+                            + "\nCPU: " + cpuDadosEstaticos.getRiscoCPU()
+                            + "\nHD: " + hdDadosEstaticos.getRiscoHd()
+                            + "\nRam: " + ramDadosEstaticos.getRiscoRam()
+            );
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
-    // Método para adicionar registros ao arquivo
-    public static void adicionarDados() {
-        GravadorService gravadorService = new GravadorService();
-        Calendar cal = Calendar.getInstance();
-        Integer riscoAnteriosCPU = 0;
-        Integer riscoAnteriosHD = 0;
-        Integer riscoAnteriosRAM = 0;
-
-        int horaAtual = cal.get(Calendar.HOUR_OF_DAY);
-        long intervalo = 3600000;
-        System.out.println(horaAtual);
-        //TODO: PENSAR EM ALGUMA MANEIRA DE FAZER ESSE LAÇO SE REPEDIR A CADA 5 MIN E N SOBREESCREVER OS DADOS EXISTENTES
-        for(int i = 0; i < 10 ; i++) { // iterar até que seja encontrado o marcador de fim-de-arquivo
-            try {
-                // Gravar novo registro no arquivo; não verifica se entrada é válida.
-                arquivoCriado.format(
-                        "-----------------------\n" +
-                        "Ultimo Registro Estatico de CPU\n" +
-                        "Dados de CPU: %d \n\n" +
-                        "Ultimo Registro Estatico de CPU \n" +
-                        "Dados de Memória: %d \n\n" +
-                        "Ultimo Registro Estatico de CPU\n" +
-                        "Dados de HDD: %d\n\n" ,
-                        gravadorService.getRiscoCPU().getRiscoCPU(),
-                        gravadorService.getRiscoRAM().getRiscoRam(),
-                        gravadorService.getRiscoHD().getRiscoHd()
-                );
-
-                break;
-            } catch (FormatterClosedException formatterClosedException) {
-                System.err.println("Erro ao escrever no arquivo. Finalizando.");
-                break;
-            } catch (NoSuchElementException elementException) {
-                System.err.println("Entrada inválida. Tente novamente.");
-//                entrada.nextLine(); // Descartar a entrada para que o usuário possa tentar de novo
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.print("Entre com o próximo código e item:\n");
-        }
-        fecharArquivo();// Fim do laço while
-    } // Fim do método adicionarDados
-
-    // Método para fechar o arquivo
-    public static void fecharArquivo() {
-        if (arquivoCriado != null) {
-            arquivoCriado.close();
-        }
-    }
 
 } // Fim da classe CriarArquivoTexto
-
