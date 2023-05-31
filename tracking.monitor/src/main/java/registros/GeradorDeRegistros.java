@@ -1,8 +1,12 @@
 package registros;
 
+import core.monitor.entidades.cpu.CpuDadosEstaticos;
+import core.monitor.entidades.hd.HdDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
+import core.monitor.entidades.memoria.RamDadosEstaticos;
 import core.monitor.repositorio.Ilooca;
 import core.monitor.resources.ITemplateJdbc;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,9 +21,7 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
     public int horaCriacaoLog;
     public LocalDateTime lastUpdate;
 
-    public int getHoraCriacaoLog() {
-        return horaCriacaoLog;
-    }
+
 
     public void gerarLog(MaquinaCorporativa maquinaCorporativa) {
         if (lastUpdate == null || ChronoUnit.HOURS.between(lastUpdate, LocalDateTime.now()) >= 1) {
@@ -28,6 +30,12 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
 
             // ferramenta que gera os logs
             Logger logger = Logger.getLogger("MyLog");
+        GravadorService gravadorService = new GravadorService();
+        LocalDateTime getCurrentTime = LocalDateTime.now();
+        this.horaCriacaoLog = getCurrentTime.getHour();
+
+        // ferramenta que gera os logs
+        Logger logger = Logger.getLogger("MyLog");
 
             // gerenciador de arquivos
             FileHandler fh;
@@ -36,6 +44,9 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
             LocalDateTime getCurrentTime = LocalDateTime.now();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH'h'mm'm'ss's'");
             String currentTime = getCurrentTime.format(timeFormatter);
+        // pega o horario atual e seta o horario dele
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH'h'mm'm'ss's'");
+        String currentTime = getCurrentTime.format(timeFormatter);
 
             //pega a data
             LocalDate getCurrentDate = LocalDate.now();
@@ -63,6 +74,11 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
                 String logFileSeparator = "logs" + File.separator + currentDate + File.separator + fileName;
                 horaCriacaoLog = getCurrentTime.getHour();
                 fh = new FileHandler(logFileSeparator);
+        try {
+            // This block configure the logger with handler and formatter
+            //iDENTIFICA pasta chamada ~logs/date~ e cria o novo arquivo dentro dela
+            String logFileSeparator = "logs" + File.separator + currentDate + File.separator + fileName;
+            fh = new FileHandler(logFileSeparator);
 
                 logger.addHandler(fh);
                 SimpleFormatter formatter = new SimpleFormatter();
@@ -82,9 +98,18 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
                 e.printStackTrace();
             }
 
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         }else {
             System.out.println("Arquivo será criado a cada 1 hora, lastUpdate: " + lastUpdate );
         }
+    }
+    public int getHoraCriacaoLog() {
+        return horaCriacaoLog;
     }
 
     @Override
