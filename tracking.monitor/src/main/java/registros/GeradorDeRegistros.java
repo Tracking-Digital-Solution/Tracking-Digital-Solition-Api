@@ -22,31 +22,21 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
     public LocalDateTime lastUpdate;
 
 
-
     public void gerarLog(MaquinaCorporativa maquinaCorporativa) {
         if (lastUpdate == null || ChronoUnit.HOURS.between(lastUpdate, LocalDateTime.now()) >= 1) {
 
-            GravadorService gravadorService = new GravadorService();
-
             // ferramenta que gera os logs
             Logger logger = Logger.getLogger("MyLog");
-        GravadorService gravadorService = new GravadorService();
-        LocalDateTime getCurrentTime = LocalDateTime.now();
-        this.horaCriacaoLog = getCurrentTime.getHour();
-
-        // ferramenta que gera os logs
-        Logger logger = Logger.getLogger("MyLog");
+            GravadorService gravadorService = new GravadorService();
+            LocalDateTime getCurrentTime = LocalDateTime.now();
+            this.horaCriacaoLog = getCurrentTime.getHour();
 
             // gerenciador de arquivos
             FileHandler fh;
 
             // pega o horario atual e seta o horario dele
-            LocalDateTime getCurrentTime = LocalDateTime.now();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH'h'mm'm'ss's'");
             String currentTime = getCurrentTime.format(timeFormatter);
-        // pega o horario atual e seta o horario dele
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH'h'mm'm'ss's'");
-        String currentTime = getCurrentTime.format(timeFormatter);
 
             //pega a data
             LocalDate getCurrentDate = LocalDate.now();
@@ -68,17 +58,12 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
             //nome da nova log
             String fileName = "TrackingLogs " + currentDate + " - " + currentTime + ".log";
 
+
             try {
                 // This block configure the logger with handler and formatter
                 //iDENTIFICA pasta chamada ~logs/date~ e cria o novo arquivo dentro dela
                 String logFileSeparator = "logs" + File.separator + currentDate + File.separator + fileName;
-                horaCriacaoLog = getCurrentTime.getHour();
                 fh = new FileHandler(logFileSeparator);
-        try {
-            // This block configure the logger with handler and formatter
-            //iDENTIFICA pasta chamada ~logs/date~ e cria o novo arquivo dentro dela
-            String logFileSeparator = "logs" + File.separator + currentDate + File.separator + fileName;
-            fh = new FileHandler(logFileSeparator);
 
                 logger.addHandler(fh);
                 SimpleFormatter formatter = new SimpleFormatter();
@@ -98,16 +83,12 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
                 e.printStackTrace();
             }
 
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        }else {
-            System.out.println("Arquivo será criado a cada 1 hora, lastUpdate: " + lastUpdate );
+        } else {
+            System.out.println("Arquivo será criado a cada 1 hora, lastUpdate: " + lastUpdate);
         }
     }
+
     public int getHoraCriacaoLog() {
         return horaCriacaoLog;
     }
