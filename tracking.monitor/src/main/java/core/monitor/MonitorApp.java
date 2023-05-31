@@ -25,6 +25,7 @@ public class MonitorApp implements Ilooca {
 
 	public static void main(String[] args){
 		try {
+			Integer contadorHoras = new Date().getHours();
 			//Inserindo máquina
 			MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
 			if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
@@ -59,12 +60,13 @@ public class MonitorApp implements Ilooca {
 				//Geração de Logs
 				GeradorDeRegistros geradorDeRegistros = new GeradorDeRegistros();
 				GravadorService gs = new GravadorService();
-				if (geradorDeRegistros.getHoraCriacaoLog() != new Date().getHours()) {
-					geradorDeRegistros.gerarLog(new MaquinaCorporativa());
-				}
-				else{
-					System.out.println("Nenhuma persistencia de dados estaticos foram alterados!");
-				}
+//TODO: fAZER ESSA CLAUSULÁ IF FUNCIONAR SÓ QUANDO O PARAMETRO FOR MUDADO, E QUANDO FOR MUDADO EX: 75 == 50 -> TRUE 50 == 50 : FALSE
+//				if () {
+//					geradorDeRegistros.gerarLog(new MaquinaCorporativa());
+//				}
+//				else{
+//					System.out.println("Nenhuma persistencia de dados estaticos foram alterados!");
+//				}
 			} else {
 				System.out.println("Maquina não existe!");
 			}
