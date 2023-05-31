@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
 
 public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 
-	public void executeQueryInsertColetaCpu() throws IOException, InterruptedException {
-		App app = new App();
+	public void executeQueryInsertColetaCpu() {
 
 		MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
 		Double doubleUsoAtual = processador.getUso();
@@ -28,7 +27,14 @@ public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 				idCpuDadosEstaticos
 		);
 		System.out.println("Insert coleta cpu: Concluído com êxito");
-		app.sendMessageCPU(usoAtual);
+		try {
+			App app = new App();
+			app.sendMessageCPU(usoAtual);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (InterruptedException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void insertColetaCpuDinamico(Integer usoAtual, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer IdCpuDadosEstaicos) {

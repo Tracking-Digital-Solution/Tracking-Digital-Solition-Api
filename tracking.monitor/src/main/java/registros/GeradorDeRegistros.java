@@ -12,11 +12,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
+    private int horaCriacaoLog;
+
+    public int getHoraCriacaoLog() {
+        return horaCriacaoLog;
+    }
 
     public void gerarLog(MaquinaCorporativa maquinaCorporativa) {
         GravadorService gravadorService = new GravadorService();
@@ -41,6 +47,7 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
         Integer day = getCurrentDate.getDayOfMonth();
         String currentDate = String.format("%d-%d-%d", day, month, year);
 
+
         //prefixo da log
         String logDirectory = "logs";
 
@@ -58,7 +65,7 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
             // This block configure the logger with handler and formatter
             //iDENTIFICA pasta chamada ~logs/date~ e cria o novo arquivo dentro dela
             String logFileSeparator = "logs" + File.separator + currentDate + File.separator + fileName;
-
+            horaCriacaoLog = getCurrentTime.getHour();
             fh = new FileHandler(logFileSeparator);
 
             logger.addHandler(fh);
@@ -78,6 +85,7 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 

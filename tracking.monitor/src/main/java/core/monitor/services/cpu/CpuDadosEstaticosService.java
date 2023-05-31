@@ -7,6 +7,8 @@ import core.monitor.repositorio.Ilooca;
 import core.monitor.services.MaquinaCorporativaService;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import registros.GeradorDeRegistros;
+import registros.GravadorService;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 	private Integer qtdListaCpuDadosEstaticos;
+	private Integer valorRiscoCPU = 75;
 
 	public void executeQueryInsertCpuDadosEstaticos() {
 		try {
@@ -31,7 +34,8 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 
 	}
 
-	private void insertCpuDadosEstaticos(String nomeProcessador, Integer idMaquina) {
+	private void insertCpuDadosEstaticos(String nomeProcessador, Integer idMaquina) throws UnknownHostException {
+
 		ITemplateJdbc.con.update(
 				"insert into CpuDadosEstaticos " +
 						"values ((?),75,(?))",
@@ -43,7 +47,6 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 						"values ((?),75,(?))",
 				idMaquina,nomeProcessador
 		);
-				qtdListaCpuDadosEstaticos++;
 	}
 	public String returnNameMachineByDatabase() throws UnknownHostException {
 		try {
@@ -91,8 +94,9 @@ public class CpuDadosEstaticosService implements Ilooca, ITemplateJdbc {
 		}
 
 
-	public Integer getQtdListaCpuDadosEstaticos() {
-		return qtdListaCpuDadosEstaticos;
+	public Integer getValorRiscoCPU() throws UnknownHostException {
+		GravadorService gs = new GravadorService();
+		return gs.getListRiscoCPU().get(0).getRiscoCPU();
 	}
 
 	private String getSystemName() throws UnknownHostException {

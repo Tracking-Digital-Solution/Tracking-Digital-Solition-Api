@@ -1,5 +1,6 @@
 package registros;
 
+import core.monitor.entidades.cpu.ColetaCpu;
 import core.monitor.entidades.cpu.CpuDadosEstaticos;
 import core.monitor.entidades.hd.HdDadosEstaticos;
 import core.monitor.entidades.maquina.MaquinaCorporativa;
@@ -17,12 +18,21 @@ public class GravadorService implements ITemplateJdbc {
     private JdbcTemplate jdbcTemplate;
 
     public List<CpuDadosEstaticos> getListRiscoCPU() throws UnknownHostException {
-        List<CpuDadosEstaticos> listaDadosEstaticosCPU = con.query("select ce.* from maquinacorporativa mc " +
+        List<CpuDadosEstaticos> listaDadosEstaticosCPU = con.query("select ce.*, cc.dataHota from maquinacorporativa mc " +
                 "INNER JOIN coletacpu cc on mc.idMaquinaCorporativa = cc.idCPU " +
                 "INNER JOIN cpudadosestaticos ce on cc.idCPU = ce.idCpuDadosEstaticos " +
                 "where mc.nomeMaquina = '" + getSystemName() + "'", new BeanPropertyRowMapper<>(CpuDadosEstaticos.class));
 
         return listaDadosEstaticosCPU;
+    }
+
+    public List<ColetaCpu> getListColetaCPU() throws UnknownHostException {
+        List<ColetaCpu> listaColetaCpu = con.query("select ce.*, cc.dataHota from maquinacorporativa mc " +
+                "INNER JOIN coletacpu cc on mc.idMaquinaCorporativa = cc.idCPU " +
+                "INNER JOIN cpudadosestaticos ce on cc.idCPU = ce.idCpuDadosEstaticos " +
+                "where mc.nomeMaquina = '" + getSystemName() + "'", new BeanPropertyRowMapper<>(ColetaCpu.class));
+
+        return listaColetaCpu;
     }
 
     public List<HdDadosEstaticos> getListRiscoHD() throws UnknownHostException {
