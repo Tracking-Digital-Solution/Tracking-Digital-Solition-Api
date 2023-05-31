@@ -15,9 +15,12 @@ import registros.GeradorDeRegistros;
 import registros.GravadorService;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static core.monitor.MonitorApp2.lastUpdate;
 
 /*
  * @author gabsm
@@ -26,70 +29,67 @@ import java.util.TimerTask;
 public class MonitorApp implements Ilooca {
 
 
-	public static void main(String[] args){
-		LocalDateTime getCurrentTime = LocalDateTime.now();
-		int delay = 5000;   // tempo de espera antes da 1ª execução da tarefa.
-		int interval = 1000;  // intervalo no qual a tarefa será executada.
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
-			public void run() {
-
-				try {
-					//Inserindo máquina
-					MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
-					if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
-						//Inserir dados nas tabelas de coleta
-
-						//Inserir CpuDadosEstaticos (DADOS ESTÁTICOS)
-						CpuDadosEstaticosService cpuDadosEstaticosService = new CpuDadosEstaticosService();
-						cpuDadosEstaticosService.executeQueryInsertCpuDadosEstaticos();
-
-						//Inserir ColetaCpu (DADOS DINÂMICOS)
-						ColetaCpuService coletaCpuService = new ColetaCpuService();
-						coletaCpuService.executeQueryInsertColetaCpu();
-
-						//Inserir HdDadosEstaticos (DADOS ESTÁTICOS)
-						HdDadosEstaticosService hdDadosEstaticoservice = new HdDadosEstaticosService();
-						hdDadosEstaticoservice.executeQueryInsertHdDadosEstaticos();
+    public static void main(String[] args) throws InterruptedException {
+        GeradorDeRegistros geradorDeRegistros = new GeradorDeRegistros();
+        if (lastUpdate == null || ChronoUnit.SECONDS.between(lastUpdate, LocalDateTime.now()) >= 20) {
+            geradorDeRegistros.gerarLog(new MaquinaCorporativa());
+            lastUpdate = LocalDateTime.now();
+        } else {
+            System.out.println("Arquivo será criado a cada 1 hora, lastUpdate: " + lastUpdate);
+        }
 
 
-						//Inserir ColetaHd (DADOS DINÂMICOS)
-						ColetaHdService coletaHdService = new ColetaHdService();
-						coletaHdService.executeQueryInsertColetaHd();
+        try {
+            //Inserindo máquina
+            MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
+            if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
+                //Inserir dados nas tabelas de coleta
 
-						//Inserir RamDadosEstaticos (DADOS ESTÁTICOS)
-						RamDadosEstaticosService ramDadosEstaticosService = new RamDadosEstaticosService();
-						ramDadosEstaticosService.executeQueryInsertRamDadosEstaticos();
+                //Inserir CpuDadosEstaticos (DADOS ESTÁTICOS)
+                CpuDadosEstaticosService cpuDadosEstaticosService = new CpuDadosEstaticosService();
+                cpuDadosEstaticosService.executeQueryInsertCpuDadosEstaticos();
 
-						//Inserir ColetaRam (DADOS DINÂMICOS)
-						ColetaRamService coletaRamService = new ColetaRamService();
-						coletaRamService.executeQueryInsertColetaRam();
+                //Inserir ColetaCpu (DADOS DINÂMICOS)
+                ColetaCpuService coletaCpuService = new ColetaCpuService();
+                coletaCpuService.executeQueryInsertColetaCpu();
 
-						timer.scheduleAtFixedRate(new TimerTask() {
-							public void run() {
-								// Geração de Logs
-								GeradorDeRegistros geradorDeRegistros = new GeradorDeRegistros();
-								GravadorService gs = new GravadorService();
-								geradorDeRegistros.gerarLog(new MaquinaCorporativa());
-							}
-						}, delay + 5000, interval + 30000);
-					} else {
-						System.out.println("Maquina não existe!");
-					}
-
-				} catch (CannotGetJdbcConnectionException e) {
-					System.out.println("Não há conexão com o banco!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+                //Inserir HdDadosEstaticos (DADOS ESTÁTICOS)
+                HdDadosEstaticosService hdDadosEstaticoservice = new HdDadosEstaticosService();
+                hdDadosEstaticoservice.executeQueryInsertHdDadosEstaticos();
 
 
-			}
-		}, delay, interval);
-	}
+                //Inserir ColetaHd (DADOS DINÂMICOS)
+                ColetaHdService coletaHdService = new ColetaHdService();
+                coletaHdService.executeQueryInsertColetaHd();
 
-	@Override
-	public String getIp() {
-		return null;
-	}
+                //Inserir RamDadosEstaticos (DADOS ESTÁTICOS)
+                RamDadosEstaticosService ramDadosEstaticosService = new RamDadosEstaticosService();
+                ramDadosEstaticosService.executeQueryInsertRamDadosEstaticos();
+
+                //Inserir ColetaRam (DADOS DINÂMICOS)
+                ColetaRamService coletaRamService = new ColetaRamService();
+                coletaRamService.executeQueryInsertColetaRam();
+
+            } else {
+                System.out.println("Maquina não existe!");
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            System.out.println("Não há conexão com o banco!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Thread.sleep(5000);
+        main(args);
+
+    }
+
+
+
+
+    @Override
+    public String getIp() {
+        return null;
+    }
 }

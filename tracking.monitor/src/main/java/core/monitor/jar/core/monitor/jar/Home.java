@@ -30,7 +30,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     /**
      * Creates new form Home
      */
-    public Home() throws UnknownHostException {
+    public Home() throws UnknownHostException, InterruptedException {
         initComponents();
         MonitorApp monitorApp = new MonitorApp();
         monitorApp.main(null);
@@ -498,7 +498,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         }
                     }, 0, 1000);
                     
-                } catch (UnknownHostException e) {
+                } catch (UnknownHostException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
