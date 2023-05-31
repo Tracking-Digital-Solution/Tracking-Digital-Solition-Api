@@ -20,13 +20,12 @@ import java.util.logging.SimpleFormatter;
 public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
     private int horaCriacaoLog;
 
-    public int getHoraCriacaoLog() {
-        return horaCriacaoLog;
-    }
+
 
     public void gerarLog(MaquinaCorporativa maquinaCorporativa) {
         GravadorService gravadorService = new GravadorService();
-
+        LocalDateTime getCurrentTime = LocalDateTime.now();
+        this.horaCriacaoLog = getCurrentTime.getHour();
 
         // ferramenta que gera os logs
         Logger logger = Logger.getLogger("MyLog");
@@ -35,7 +34,6 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
         FileHandler fh;
 
         // pega o horario atual e seta o horario dele
-        LocalDateTime getCurrentTime = LocalDateTime.now();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH'h'mm'm'ss's'");
         String currentTime = getCurrentTime.format(timeFormatter);
 
@@ -65,7 +63,6 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
             // This block configure the logger with handler and formatter
             //iDENTIFICA pasta chamada ~logs/date~ e cria o novo arquivo dentro dela
             String logFileSeparator = "logs" + File.separator + currentDate + File.separator + fileName;
-            horaCriacaoLog = getCurrentTime.getHour();
             fh = new FileHandler(logFileSeparator);
 
             logger.addHandler(fh);
@@ -80,15 +77,17 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
                             + "\nRam: " + gravadorService.getListRiscoRAM().get(gravadorService.getListRiscoRAM().size() - 1)
             );
 
+
         } catch (SecurityException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
     }
-
+    public int getHoraCriacaoLog() {
+        return horaCriacaoLog;
+    }
 
     @Override
     public String getIp() {
