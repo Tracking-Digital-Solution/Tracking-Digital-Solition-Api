@@ -19,7 +19,6 @@ import java.util.List;
 public class ColetaHdService implements Ilooca, ITemplateJdbc {
 
     public void executeQueryInsertColetaHd() throws IOException, InterruptedException {
-        App app = new App();
 
         MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
         Long longDisponivelHd = (discoGrupo.getVolumes().get(0).getDisponivel());
@@ -33,8 +32,15 @@ public class ColetaHdService implements Ilooca, ITemplateJdbc {
                 idHdDadosEstaticos
         );
         System.out.println("Insert coleta HD: Concluído com êxito");
-        app.sendMessageHD(longDisponivelHd);
-
+        try {
+            App app = new App();
+            app.sendMessageHD(longDisponivelHd);
+            app.sendMessageAlertHD(longDisponivelHd);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void insertColetaHdDinamico(Long disponivel, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer idHdDadosEstaticos) {

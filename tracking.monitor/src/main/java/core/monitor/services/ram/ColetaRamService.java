@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class ColetaRamService implements Ilooca, ITemplateJdbc {
 
     public void executeQueryInsertColetaRam() throws IOException, InterruptedException{
-        App app = new App();
 
         MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
         Long longUsoAtual = looca.getMemoria().getEmUso();
@@ -30,7 +29,15 @@ public class ColetaRamService implements Ilooca, ITemplateJdbc {
                 idHdDadosEstaticos
         );
         System.out.println("Insert coleta RAM: Concluído com êxito");
-        app.sendMessageRAM(longUsoAtual);
+        try {
+            App app = new App();
+            app.sendMessageRAM(longUsoAtual);
+            app.sendMessageAlertRAM(longUsoAtual);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void insertColetaRamDinamico(Long disponivel, Double doubleDisponivel, LocalDateTime dataHora, Integer idMaquinaCorporativa, Integer idRamDadosEstaticos) {
