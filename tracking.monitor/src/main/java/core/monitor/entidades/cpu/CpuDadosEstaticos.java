@@ -9,7 +9,7 @@ public class CpuDadosEstaticos {
 	private String nomeProcessador;
 	private List<ColetaCpu> listaColetaCpu = new ArrayList<>();
 
-	public CpuDadosEstaticos(Integer idCpuDadosEstaticos, Integer riscoCPU, String nomeProcessador, Object o) {
+	public CpuDadosEstaticos(Integer idCpuDadosEstaticos, Integer riscoCPU, String nomeProcessador) {
 		this.idCpuDadosEstaticos = idCpuDadosEstaticos;
 		this.riscoCPU = riscoCPU;
 		this.nomeProcessador = nomeProcessador;

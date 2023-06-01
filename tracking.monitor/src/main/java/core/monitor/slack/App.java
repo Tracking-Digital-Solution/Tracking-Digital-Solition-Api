@@ -21,9 +21,10 @@ public class App {
 
 
     public void sendMessageCPU(Integer usoAtual) throws IOException, InterruptedException {
-        CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos();
+        CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos(null,gs.getListRiscoCPU().get(gs.getListRiscoCPU().size() - 1).getRiscoCPU(),null);
 
         if(!gs.getListColetaCPU().isEmpty()) {
+            System.out.println(cpuDadosEstaticos.getRiscoCPU());
             if (usoAtual > cpuDadosEstaticos.getRiscoCPU()) {
                 json.put("text", "Crítico - Sua CPU está em % de uso :shrug:");
                 Slack.sendMessage(json);
@@ -31,7 +32,7 @@ public class App {
         }
     }
     public void sendMessageRAM(Long usoAtual) throws IOException, InterruptedException {
-        RamDadosEstaticos ramDadosEstaticos = new RamDadosEstaticos();
+        RamDadosEstaticos ramDadosEstaticos = new RamDadosEstaticos(null,gs.getListRiscoRAM().get(gs.getListRiscoRAM().size() - 1).getRiscoRam(),null);
 
         if (!gs.getListRiscoRAM().isEmpty()) {
             if (usoAtual > ramDadosEstaticos.getRiscoRam()) {
@@ -41,7 +42,7 @@ public class App {
         }
     }
     public void sendMessageHD(Long usoAtual) throws IOException, InterruptedException {
-        HdDadosEstaticos hdDadosEstaticos = new HdDadosEstaticos();
+        HdDadosEstaticos hdDadosEstaticos = new HdDadosEstaticos(null,gs.getListRiscoHD().get(gs.getListRiscoHD().size() - 1).getRiscoHd(),null);
 
         if (!gs.getListRiscoHD().isEmpty()) {
             if (usoAtual < hdDadosEstaticos.getRiscoHd()) {
@@ -52,7 +53,7 @@ public class App {
     }
 
     public void sendMessageAlertCPU(Integer usoAtual) throws IOException, InterruptedException {
-        CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos();
+        CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos(null,gs.getListRiscoCPU().get(gs.getListRiscoCPU().size() - 1).getRiscoCPU(),null);
 
         if (!gs.getListRiscoCPU().isEmpty()) {
             if (usoAtual > (cpuDadosEstaticos.getRiscoCPU() * 80 / 100)) {
@@ -64,7 +65,7 @@ public class App {
     }
 
     public void sendMessageAlertRAM(Long usoAtual) throws IOException, InterruptedException {
-        RamDadosEstaticos ramDadosEstaticos = new RamDadosEstaticos();
+        RamDadosEstaticos ramDadosEstaticos = new RamDadosEstaticos(null,gs.getListRiscoRAM().get(gs.getListRiscoRAM().size() - 1).getRiscoRam(),null);
 
         if (!gs.getListRiscoRAM().isEmpty()) {
             if (usoAtual > (ramDadosEstaticos.getRiscoRam() * 80 / 100)) {
@@ -76,7 +77,7 @@ public class App {
     }
 
     public void sendMessageAlertHD(Long usoAtual) throws IOException, InterruptedException {
-        HdDadosEstaticos hdDadosEstaticos = new HdDadosEstaticos();
+        HdDadosEstaticos hdDadosEstaticos = new HdDadosEstaticos(null,gs.getListRiscoHD().get(gs.getListRiscoHD().size() - 1).getRiscoHd(),null);
 
         if (!gs.getListRiscoHD().isEmpty()) {
             if (usoAtual > (hdDadosEstaticos.getRiscoHd() * 80 / 100)) {
