@@ -26,26 +26,25 @@ public class FuncoesApi implements Ilooca {
         return doisPrimeirosDigitos;
     }
 
-    public Double buscarBancoCpu() throws UnknownHostException {
-        List<ColetaCpu> cpu = con.query("SELECT cc.usoAtual FROM maquinacorporativa mc " +
-                        "INNER JOIN coletacpu cc ON mc.idMaquinaCorporativa = cc.idCPU " +
-                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
-                        "order by cc.idCPU desc"
+    public Double buscarBancoCpuPico() throws UnknownHostException {
+        List<ColetaCpu> cpu = con.query("SELECT MAX(usoAtual) cc.usoAtual FROM maquinacorporativa mc \n" +
+                        "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
+                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"') "
                 , new BeanPropertyRowMapper<>(ColetaCpu.class));
-        return cpu.get(0).getUsoAtual();
+       return cpu.get(0).getUsoAtual();
     }
 
     public Double buscarBancoCpuUltimo() throws UnknownHostException {
-        List<ColetaCpu> cpu = con.query("SELECT cc.usoAtual FROM maquinacorporativa mc " +
-                        "INNER JOIN coletacpu cc ON mc.idMaquinaCorporativa = cc.idCPU " +
-                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
+        List<ColetaCpu> cpu = con.query("SELECT TOP 1 cc.usoAtual FROM maquinacorporativa mc \n" +
+                        "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
+                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"') "+
                         "order by cc.idCPU desc"
                 , new BeanPropertyRowMapper<>(ColetaCpu.class));
-       return cpu.get(1).getUsoAtual();
+       return cpu.get(0).getUsoAtual();
 
     }
 //TODO: FAZER A BUSCA DO HD FUNCIONAR
-    public Double buscarBancoHD() throws UnknownHostException {
+    public Double buscarBancoHDPico() throws UnknownHostException {
         List<ColetaHd> hd = con.query("SELECT cc.disponivel FROM maquinacorporativa mc " +
                         "INNER JOIN coletahd cc ON mc.idMaquinaCorporativa = cc.idHD " +
                         "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
@@ -60,7 +59,7 @@ public class FuncoesApi implements Ilooca {
                         "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
                         "order by cc.idHD desc"
                 , new BeanPropertyRowMapper<>(ColetaHd.class));
-        System.out.println(hd.get(1).getIdHd());
+        System.out.println(hd.get(0).getIdHd());
         return hd.get(0).getDisponivel();
     }
 

@@ -489,12 +489,18 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                     home.setVisible(true);
                     MonitorApp monitorApp = new MonitorApp();
                     monitorApp.main(null);
-                    
+
                     Timer  timer = new Timer();
-                     timer.scheduleAtFixedRate(new TimerTask() {
+                    timer.scheduleAtFixedRate(new TimerTask() {
                         @Override
                         public void run() {
-                           home.usoAtualCPU.setText("" + contador++);
+                            FuncoesApi api = new FuncoesApi();
+                            try {
+                                home.usoAtualCPU.setText(String.format("%.0f%%", api.buscarBancoCpuUltimo()));
+                                home.usocpu01.setText(String.format(""));
+                            } catch (UnknownHostException ex) {
+                                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }, 0, 1000);
                     

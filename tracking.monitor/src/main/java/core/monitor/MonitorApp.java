@@ -20,18 +20,16 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static core.monitor.MonitorApp2.lastUpdate;
-
 /*
  * @author gabsm
  */
 
 public class MonitorApp implements Ilooca {
-
+public static LocalDateTime lastUpdate;
 
     public static void main(String[] args) throws InterruptedException {
         GeradorDeRegistros geradorDeRegistros = new GeradorDeRegistros();
-        if (lastUpdate == null || ChronoUnit.SECONDS.between(lastUpdate, LocalDateTime.now()) >= 20) {
+        if (lastUpdate == null || ChronoUnit.HOURS.between(lastUpdate, LocalDateTime.now()) >= 1) {
             geradorDeRegistros.gerarLog(new MaquinaCorporativa());
             lastUpdate = LocalDateTime.now();
         } else {
