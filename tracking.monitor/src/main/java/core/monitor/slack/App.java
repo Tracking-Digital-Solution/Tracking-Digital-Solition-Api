@@ -3,9 +3,6 @@ package core.monitor.slack;
 import core.monitor.entidades.cpu.CpuDadosEstaticos;
 import core.monitor.entidades.hd.HdDadosEstaticos;
 import core.monitor.entidades.memoria.RamDadosEstaticos;
-import core.monitor.services.cpu.CpuDadosEstaticosService;
-import core.monitor.services.hd.HdDadosEstaticosService;
-import core.monitor.services.ram.RamDadosEstaticosService;
 import net.minidev.json.JSONObject;
 import registros.GravadorService;
 
@@ -24,7 +21,6 @@ public class App {
         CpuDadosEstaticos cpuDadosEstaticos = new CpuDadosEstaticos(null,gs.getListRiscoCPU().get(gs.getListRiscoCPU().size() - 1).getRiscoCPU(),null);
 
         if(!gs.getListColetaCPU().isEmpty()) {
-            System.out.println(cpuDadosEstaticos.getRiscoCPU());
             if (usoAtual > cpuDadosEstaticos.getRiscoCPU()) {
                 json.put("text", "Crítico - Sua CPU está em % de uso :shrug:");
                 Slack.sendMessage(json);
