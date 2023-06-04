@@ -4,7 +4,9 @@
  */
 package core.monitor.jar.core.monitor.jar;
 
+import com.github.britooo.looca.api.core.Looca;
 import core.monitor.MonitorApp;
+import core.monitor.MonitorAppJar;
 import core.monitor.jar.core.monitor.jar.function.FuncoesApi;
 import core.monitor.repositorio.Ilooca;
 
@@ -32,8 +34,8 @@ public class Home extends javax.swing.JFrame implements Ilooca {
      */
     public Home() throws UnknownHostException, InterruptedException {
         initComponents();
-        MonitorApp monitorApp = new MonitorApp();
-        monitorApp.main(null);
+        //MonitorApp monitorApp = new MonitorApp();
+        //monitorApp.main(null);
     }
 
     /**
@@ -51,31 +53,44 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         usoAtualHD = new javax.swing.JLabel();
-        usohd01 = new javax.swing.JLabel();
-        usohd02 = new javax.swing.JLabel();
+        usohd2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        usohd3 = new javax.swing.JLabel();
+        usohd4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        usoram01 = new javax.swing.JLabel();
+        usoram2 = new javax.swing.JLabel();
         usoAtualRAM = new javax.swing.JLabel();
-        usoram02 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        usoram3 = new javax.swing.JLabel();
+        usoram4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        usocpu01 = new javax.swing.JLabel();
-        usocpu02 = new javax.swing.JLabel();
+        usocpu2 = new javax.swing.JLabel();
+        usocpu4 = new javax.swing.JLabel();
         usoAtualCPU = new javax.swing.JLabel();
+        usocpu3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel24 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         dateTime = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         btnAtualizarDados.setText("Atualizar Dados");
         btnAtualizarDados.addActionListener(new java.awt.event.ActionListener() {
@@ -99,15 +114,11 @@ public class Home extends javax.swing.JFrame implements Ilooca {
 
         usoAtualHD.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         usoAtualHD.setForeground(new java.awt.Color(0, 0, 0));
-        usoAtualHD.setText("45%");
+        usoAtualHD.setText("0%");
 
-        usohd01.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        usohd01.setForeground(new java.awt.Color(0, 0, 0));
-        usohd01.setText("43%");
-
-        usohd02.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        usohd02.setForeground(new java.awt.Color(0, 0, 0));
-        usohd02.setText("40%");
+        usohd2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usohd2.setForeground(new java.awt.Color(0, 0, 0));
+        usohd2.setText("0%");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
@@ -116,6 +127,15 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Registros");
+
+        usohd3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usohd3.setForeground(new java.awt.Color(0, 0, 0));
+        usohd3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usohd3.setText("OK");
+
+        usohd4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usohd4.setForeground(new java.awt.Color(0, 0, 0));
+        usohd4.setText("Limite atingido: 0x");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,12 +147,14 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                     .addComponent(jLabel13)
                     .addComponent(jLabel11))
                 .addGap(94, 94, 94)
-                .addComponent(usoAtualHD, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usohd01, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(usohd02, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addComponent(usoAtualHD)
+                .addGap(138, 138, 138)
+                .addComponent(usohd2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(usohd3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(usohd4)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,24 +167,21 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         .addComponent(jLabel13))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(usoAtualHD, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usohd01, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usohd02, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(usohd2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usohd3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usohd4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(19, 19, 19))
         );
 
         jPanel3.setBackground(new java.awt.Color(187, 187, 187));
 
-        usoram01.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        usoram01.setForeground(new java.awt.Color(0, 0, 0));
-        usoram01.setText("56%");
+        usoram2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usoram2.setForeground(new java.awt.Color(0, 0, 0));
+        usoram2.setText("0%");
 
         usoAtualRAM.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         usoAtualRAM.setForeground(new java.awt.Color(0, 0, 0));
-        usoAtualRAM.setText("75%");
-
-        usoram02.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        usoram02.setForeground(new java.awt.Color(0, 0, 0));
-        usoram02.setText("15%");
+        usoAtualRAM.setText("0%");
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(0, 0, 0));
@@ -171,6 +190,15 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("Registros");
+
+        usoram3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usoram3.setForeground(new java.awt.Color(0, 0, 0));
+        usoram3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usoram3.setText("OK");
+
+        usoram4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usoram4.setForeground(new java.awt.Color(0, 0, 0));
+        usoram4.setText("Limite atingido: 0x");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -183,11 +211,13 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                     .addComponent(jLabel22))
                 .addGap(98, 98, 98)
                 .addComponent(usoAtualRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
-                .addComponent(usoram01)
-                .addGap(99, 99, 99)
-                .addComponent(usoram02, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(118, 118, 118)
+                .addComponent(usoram2)
+                .addGap(105, 105, 105)
+                .addComponent(usoram3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(usoram4)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,8 +230,9 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         .addComponent(jLabel23))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(usoAtualRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usoram01, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usoram02, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(usoram2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usoram3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usoram4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
@@ -215,17 +246,22 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Registros");
 
-        usocpu01.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        usocpu01.setForeground(new java.awt.Color(0, 0, 0));
-        usocpu01.setText("10%");
+        usocpu2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usocpu2.setForeground(new java.awt.Color(0, 0, 0));
+        usocpu2.setText("0%");
 
-        usocpu02.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        usocpu02.setForeground(new java.awt.Color(0, 0, 0));
-        usocpu02.setText("70%");
+        usocpu4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usocpu4.setForeground(new java.awt.Color(0, 0, 0));
+        usocpu4.setText("Limite atingido: 0x");
 
         usoAtualCPU.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         usoAtualCPU.setForeground(new java.awt.Color(0, 0, 0));
-        usoAtualCPU.setText("25%");
+        usoAtualCPU.setText("0%");
+
+        usocpu3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usocpu3.setForeground(new java.awt.Color(0, 0, 0));
+        usocpu3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usocpu3.setText("OK");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -236,13 +272,15 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5))
-                .addGap(86, 86, 86)
-                .addComponent(usoAtualCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usocpu01, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(usocpu02, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(92, 92, 92)
+                .addComponent(usoAtualCPU)
+                .addGap(139, 139, 139)
+                .addComponent(usocpu2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(usocpu3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(usocpu4)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,8 +289,9 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(usoAtualCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usocpu01, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usocpu02, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(usocpu2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usocpu4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usocpu3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -293,11 +332,6 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         jLabel24.setForeground(new java.awt.Color(255, 214, 10));
         jLabel24.setText("Dados CPU :");
 
-        jLabel7.setBackground(new java.awt.Color(255, 214, 10));
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Uso atual");
-
         jLabel8.setBackground(new java.awt.Color(255, 214, 10));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -312,6 +346,67 @@ public class Home extends javax.swing.JFrame implements Ilooca {
             }
         });
 
+        jLabel10.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Máximo Atingido");
+
+        jLabel12.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Máximo Atingido");
+
+        jLabel14.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Uso atual");
+
+        jLabel15.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Máximo Atingido");
+
+        jLabel16.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Limites Atingidos");
+
+        jLabel18.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Status");
+
+        jLabel19.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Status");
+
+        jLabel20.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Status");
+
+        jLabel21.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Limites Atingidos");
+
+        jLabel25.setBackground(new java.awt.Color(255, 214, 10));
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Limites Atingidos");
+
+        jButton2.setBackground(new java.awt.Color(51, 204, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Iniciar");
+        jButton2.setActionCommand("btnsair");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -322,42 +417,59 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         .addGap(29, 29, 29)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(85, 85, 85)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(191, 191, 191)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(27, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dateTime)
-                        .addGap(52, 52, 52))))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(367, 367, 367)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(583, Short.MAX_VALUE)))
+                        .addGap(4, 4, 4)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3)
+                                    .addGap(58, 58, 58)
+                                    .addComponent(jLabel10)
+                                    .addGap(74, 74, 74)
+                                    .addComponent(jLabel20)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel21)
+                                    .addGap(42, 42, 42))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel8)
+                                    .addGap(62, 62, 62)
+                                    .addComponent(jLabel15)
+                                    .addGap(74, 74, 74)
+                                    .addComponent(jLabel18)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel25)
+                                    .addGap(44, 44, 44))
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel14)
+                                    .addGap(62, 62, 62)
+                                    .addComponent(jLabel12)
+                                    .addGap(76, 76, 76)
+                                    .addComponent(jLabel19)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                                    .addComponent(jLabel16)
+                                    .addGap(44, 44, 44)))
+                            .addComponent(dateTime, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,58 +479,70 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         .addGap(25, 25, 25)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(dateTime)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(dateTime)
+                                .addGap(49, 49, 49)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)))
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(32, Short.MAX_VALUE))
+                        .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))))
+                        .addGap(76, 76, 76))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(92, 92, 92)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(536, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -454,6 +578,17 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         dateTime.setText(formato.format(dataSistema));
     }//GEN-LAST:event_dateTimeMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      MonitorAppJar jar = new MonitorAppJar();
+        Timer  timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                jar.monitorApp();
+            }
+        }, 1000, 10000);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -487,22 +622,46 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                 try {
                     Home home = new Home();
                     home.setVisible(true);
-                    MonitorApp monitorApp = new MonitorApp();
-                    monitorApp.main(null);
-
+                                       
                     Timer  timer = new Timer();
                     timer.scheduleAtFixedRate(new TimerTask() {
                         @Override
                         public void run() {
                             FuncoesApi api = new FuncoesApi();
-                            try {
-                                home.usoAtualCPU.setText(String.format("%.0f%%", api.buscarBancoCpuUltimo()));
-                                home.usocpu01.setText(String.format(""));
+                            Looca looca = new Looca();
+                            
+                            Long hdUsado = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
+                            Double hdUsadoGB = hdUsado / (1024.0 * 1024.0 * 1024.0);
+                            Long hdTotal = looca.getGrupoDeDiscos().getTamanhoTotal();
+                            Double hdTotalGB = hdTotal / (1024.0 * 1024.0 * 1024.0);
+                            Double contaHD = (hdTotalGB / 100) * hdUsadoGB;
+                            
+                             Long ramUsado = looca.getMemoria().getDisponivel();
+                             Long ramTotal = looca.getMemoria().getTotal();
+                              Double contaRAM = ((double) ramTotal / (1024 * 1024 * 1024) * 12.4) - ((double) ramUsado / (1024 * 1024 * 1024) /((double) ramTotal / (1024 * 1024 * 1024)) * 100);
+                             try {
+                                //CPU
+                                home.usoAtualCPU.setText(String.format("%.0f%%", looca.getProcessador().getUso()));
+                                home.usocpu2.setText(String.format("%.0f%%", api.buscarBancoCpuPico()));
+                                home.usocpu3.setText(String.format("%s",api.buscarBancoCpuStatus()));
+                                home.usocpu4.setText(String.format("%s", api.buscarBancoCpuContagem()));
+                                
+                                //HD
+                                home.usoAtualHD.setText(String.format("%.0f%%",contaHD));
+                                home.usohd2.setText(String.format("%.0f%%", api.buscarBancoHDPico()));
+                                home.usohd3.setText(String.format("%s", api.buscarBancoHdStatus()));
+                               home.usohd4.setText(String.format("%s",api.buscarBancoHdContagem()));
+                               
+                               //RAM
+                                home.usoAtualRAM.setText(String.format("%.0f%%",contaRAM));
+                                home.usoram2.setText(String.format("%.0f%%", api.buscarBancoRAMPico()));
+                                home.usoram3.setText(String.format("%s", api.buscarBancoRamStatus()));
+                                home.usoram4.setText(String.format("%s",api.buscarBancoRamContagem()));
                             } catch (UnknownHostException ex) {
                                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
-                    }, 0, 1000);
+                    }, 1000, 2000);
                     
                 } catch (UnknownHostException | InterruptedException e) {
                     throw new RuntimeException(e);
@@ -515,18 +674,28 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     private javax.swing.JButton btnAtualizarDados;
     private javax.swing.JLabel dateTime;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -537,12 +706,15 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     private javax.swing.JLabel usoAtualCPU;
     private javax.swing.JLabel usoAtualHD;
     private javax.swing.JLabel usoAtualRAM;
-    private javax.swing.JLabel usocpu01;
-    private javax.swing.JLabel usocpu02;
-    private javax.swing.JLabel usohd01;
-    private javax.swing.JLabel usohd02;
-    private javax.swing.JLabel usoram01;
-    private javax.swing.JLabel usoram02;
+    private javax.swing.JLabel usocpu2;
+    private javax.swing.JLabel usocpu3;
+    private javax.swing.JLabel usocpu4;
+    private javax.swing.JLabel usohd2;
+    private javax.swing.JLabel usohd3;
+    private javax.swing.JLabel usohd4;
+    private javax.swing.JLabel usoram2;
+    private javax.swing.JLabel usoram3;
+    private javax.swing.JLabel usoram4;
     // End of variables declaration//GEN-END:variables
 
     

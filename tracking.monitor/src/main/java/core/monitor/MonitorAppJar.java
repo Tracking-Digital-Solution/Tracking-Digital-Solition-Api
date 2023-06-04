@@ -1,6 +1,5 @@
 package core.monitor;
 
-import core.monitor.entidades.maquina.MaquinaCorporativa;
 import core.monitor.repositorio.Ilooca;
 import core.monitor.services.cpu.ColetaCpuService;
 import core.monitor.services.cpu.CpuDadosEstaticosService;
@@ -10,31 +9,11 @@ import core.monitor.services.MaquinaCorporativaService;
 import core.monitor.services.ram.ColetaRamService;
 import core.monitor.services.ram.RamDadosEstaticosService;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
-import registros.GeradorDeRegistros;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import org.apache.http.util.Args;
 
-public class MonitorApp implements Ilooca {
-    public static LocalDateTime lastUpdate;
-
-    public static void main(String[] args) {
-        GeradorDeRegistros geradorDeRegistros = new GeradorDeRegistros();
-
-        while (true) {
-            try {
-                if (lastUpdate == null || ChronoUnit.HOURS.between(lastUpdate, LocalDateTime.now()) >= 1) {
-                    geradorDeRegistros.gerarLog(new MaquinaCorporativa());
-                    lastUpdate = LocalDateTime.now();
-                } else {
-                    System.out.println("Arquivo será criado a cada 1 hora, lastUpdate: " + lastUpdate);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
+public class MonitorAppJar implements Ilooca {
+    public void monitorApp(){
+        try {
                 // Inserir máquina
                 MaquinaCorporativaService maquinaCorporativaService = new MaquinaCorporativaService();
                 if (maquinaCorporativaService.executeQueryUpdateMaquinaCorporativa()) {
@@ -69,17 +48,7 @@ public class MonitorApp implements Ilooca {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            try {
-                Thread.sleep(5000); // Aguarda 5 segundos antes da próxima execução
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                break; // Sai do loop caso ocorra uma interrupção
-            }
-        }
     }
-
-
     @Override
     public String getIp() {
         return null;

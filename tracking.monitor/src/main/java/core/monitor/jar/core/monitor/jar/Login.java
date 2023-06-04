@@ -253,7 +253,7 @@ public class Login extends javax.swing.JFrame implements Ilooca {
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Login.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException | InterruptedException ex) {
+        } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

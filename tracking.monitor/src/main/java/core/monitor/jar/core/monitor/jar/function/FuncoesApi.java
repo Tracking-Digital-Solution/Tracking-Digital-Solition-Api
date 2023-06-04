@@ -26,13 +26,15 @@ public class FuncoesApi implements Ilooca {
         return doisPrimeirosDigitos;
     }
 
-    public Double buscarBancoCpuPico() throws UnknownHostException {
-        List<ColetaCpu> cpu = con.query("SELECT MAX(usoAtual) cc.usoAtual FROM maquinacorporativa mc \n" +
-                        "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
-                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"') "
-                , new BeanPropertyRowMapper<>(ColetaCpu.class));
-       return cpu.get(0).getUsoAtual();
-    }
+public Double buscarBancoCpuPico() throws UnknownHostException {
+    Double cpu = con.queryForObject(
+        "SELECT MAX(cc.usoAtual) pico FROM maquinacorporativa mc " +
+        "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa " +
+        "WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '" + getSystemName() + "') AND DAY(cc.dataHota) < DAY(getDate())",
+        Double.class
+    );
+    return cpu;
+}
 
     public Double buscarBancoCpuUltimo() throws UnknownHostException {
         List<ColetaCpu> cpu = con.query("SELECT TOP 1 cc.usoAtual FROM maquinacorporativa mc \n" +
@@ -43,43 +45,115 @@ public class FuncoesApi implements Ilooca {
        return cpu.get(0).getUsoAtual();
 
     }
+    
+    public String buscarBancoCpuStatus() throws UnknownHostException{
+        String cpu = con.queryForObject("SELECT TOP 1\n" +
+"    CASE\n" +
+"        WHEN cc.usoAtual <= (SELECT MAX(ce.usoAtual) FROM coletaCpu ce WHERE DAY(cc.dataHota) < DAY(getDate()))\n" +
+"		 THEN 'OK'\n" +
+"        ELSE 'Aviso'\n" +
+"    END AS Status\n" +
+"FROM maquinacorporativa mc\n" +
+"INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHota) < DAY(getDate())\n" +
+"order by cc.usoAtual desc  ",String.class);
+        return cpu;
+    }
+    
+        public String buscarBancoCpuContagem() throws UnknownHostException{
+        String cpu = con.queryForObject("SELECT TOP 1\n" +
+"    'Limite atingido: ' + CAST(COUNT(*) AS NVARCHAR) + 'x' AS Contagem\n" +
+"FROM maquinacorporativa mc\n" +
+"INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON')\n" +
+"GROUP BY cc.usoAtual",String.class);
+        return cpu;
+    }
+    
+    
 //TODO: FAZER A BUSCA DO HD FUNCIONAR
     public Double buscarBancoHDPico() throws UnknownHostException {
-        List<ColetaHd> hd = con.query("SELECT cc.disponivel FROM maquinacorporativa mc " +
-                        "INNER JOIN coletahd cc ON mc.idMaquinaCorporativa = cc.idHD " +
-                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
-                        "order by cc.idHD desc"
-                , new BeanPropertyRowMapper<>(ColetaHd.class));
-        return hd.get(0).getDisponivel();
+        Long hd = con.queryForObject("SELECT MAX(cc.disponivel) pico FROM maquinacorporativa mc \n" +
+"        INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
+"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())"
+                ,Long.class);
+
+                            Double hdUsadoGB = hd / Math.pow(1024, 3);
+                            Long hdTotal = looca.getGrupoDeDiscos().getTamanhoTotal();
+                            Double hdTotalGB = hdTotal / (1024.0 * 1024.0 * 1024.0);
+                            Double conta = (hdTotalGB / 100) * hdUsadoGB;
+        return conta;
+    }
+    
+      public String buscarBancoHdStatus() throws UnknownHostException{
+        String hd = con.queryForObject("SELECT TOP 1\n" +
+"    CASE\n" +
+"        WHEN cc.disponivel <= (\n" +
+"			SELECT MAX(ce.disponivel) FROM coletaHd ce WHERE DAY(cc.dataHora) < DAY(getDate())\n" +
+"			)  THEN 'OK'\n" +
+"        ELSE 'Aviso'\n" +
+"    END AS Status\n" +
+"FROM maquinacorporativa mc\n" +
+"INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())\n" +
+"order by cc.disponivel desc  ",String.class);
+        return hd;
+    }
+    
+        public String buscarBancoHdContagem() throws UnknownHostException{
+        String hd = con.queryForObject("SELECT TOP 1\n" +
+"    'Limite atingido: ' + CAST(COUNT(*) AS NVARCHAR) + 'x' AS Contagem\n" +
+"FROM maquinacorporativa mc\n" +
+"INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON')\n" +
+"GROUP BY cc.disponivel",String.class);
+        return hd;
+    }
+    
+
+    public Double buscarBancoRAMPico() throws UnknownHostException {
+        Long ram = con.queryForObject("SELECT MAX(cc.usoAtual) pico FROM maquinacorporativa mc \n" +
+"        INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
+"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())"
+                ,Long.class);
+
+              Long ramTotal = looca.getMemoria().getTotal();
+              Double contaRAM = (((double) ramTotal / (1024 * 1024) * 12.4) - ((double) ram / (1024 * 1024) /((double) ramTotal / (1024 * 1024)) * 100) )/ 1000;
+        return contaRAM;
     }
 
-    public Double buscarBancoHDUltimo() throws UnknownHostException {
-        List<ColetaHd> hd = con.query("SELECT cc.disponivel FROM maquinacorporativa mc " +
-                        "INNER JOIN coletahd cc ON mc.idMaquinaCorporativa = cc.idHD " +
-                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
-                        "order by cc.idHD desc"
-                , new BeanPropertyRowMapper<>(ColetaHd.class));
-        System.out.println(hd.get(0).getIdHd());
-        return hd.get(0).getDisponivel();
+    public String buscarBancoRamStatus() throws UnknownHostException {
+        String hd = con.queryForObject("SELECT TOP 1\n" +
+"    CASE\n" +
+"        WHEN cc.usoAtual <= (\n" +
+"			SELECT MAX(ce.disponivel) FROM coletaram ce WHERE DAY(cc.dataHora) < DAY(getDate())\n" +
+"			)  THEN 'OK'\n" +
+"        ELSE 'Aviso'\n" +
+"    END AS Status\n" +
+"FROM maquinacorporativa mc\n" +
+"INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())\n" +
+"order by cc.disponivel desc  ",String.class);
+        return hd;
     }
-
-    public Double buscarBancoRAM() throws UnknownHostException {
-        List<ColetaRam> ram = con.query("SELECT cc.usoAtual FROM maquinacorporativa mc " +
-                        "INNER JOIN coletaram cc ON mc.idMaquinaCorporativa = cc.idram " +
-                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
-                        "order by cc.idram desc"
-                , new BeanPropertyRowMapper<>(ColetaRam.class));
-        return ram.get(0).getUsoAtual();
-    }
-
-    public Double buscarBancoRAMUltimo() throws UnknownHostException {
-        List<ColetaRam> ram = con.query("SELECT cc.usoAtual FROM maquinacorporativa mc " +
-                        "INNER JOIN coletaram cc ON mc.idMaquinaCorporativa = cc.idram " +
-                        "WHERE fkMaquina = (select idMaquinaCorporativa from MaquinaCorporativa where nomeMaquina = '" + getSystemName()+"')" +
-                        "order by cc.idram desc"
-                , new BeanPropertyRowMapper<>(ColetaRam.class));
-        System.out.println(ram.get(1).getUsoAtual());
-        return ram.get(1).getUsoAtual();
+    
+    public String buscarBancoRamContagem() throws UnknownHostException {
+        String ram = con.queryForObject("SELECT TOP 1 'Limite atingido: ' + CAST(COUNT(*) AS NVARCHAR) + 'x' AS Contagem\n" +
+            "FROM maquinacorporativa mc\n" +
+            "INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
+            "WHERE\n" +
+            "    fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON')\n" +
+            "    AND cc.usoAtual <= (\n" +
+            "        SELECT MAX(ce.usoAtual)\n" +
+            "        FROM coletaram ce\n" +
+            "        WHERE\n" +
+            "            ce.dataHora >= CAST(DATEADD(DAY, DATEDIFF(DAY, 0, cc.dataHora), 0) AS DATETIME)\n" +
+            "            AND ce.dataHora < DATEADD(DAY, 1, CAST(DATEADD(DAY, DATEDIFF(DAY, 0, cc.dataHora), 0) AS DATETIME))\n" +
+            "    )\n" +
+            "    AND DAY(cc.dataHora) < DAY(GETDATE())\n" +
+            "GROUP BY cc.disponivel\n" +
+            "ORDER BY cc.disponivel DESC;",String.class);
+        return ram;
     }
 
 
