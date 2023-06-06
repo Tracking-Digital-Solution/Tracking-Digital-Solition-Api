@@ -67,12 +67,18 @@ public class GeradorDeRegistros implements ITemplateJdbc, Ilooca {
             fh.setFormatter(formatter);
 
             // the following statement is used to log any messages
-            logger.info(
-                    "\nNome da maquina do Usuário: " + rede.getParametros().getHostName()
-                            + "\nCPU: " + gravadorService.getListRiscoCPU().get(gravadorService.getListRiscoCPU().size() - 1).toString()
-                            + "\nHD: " + gravadorService.getListRiscoHD().get(gravadorService.getListRiscoHD().size() - 1)
-                            + "\nRam: " + gravadorService.getListRiscoRAM().get(gravadorService.getListRiscoRAM().size() - 1)
-            );
+            if(
+                    gravadorService.getListRiscoCPU().size() > 0 &&
+                    gravadorService.getListRiscoHD().size() > 0 &&
+                    gravadorService.getListRiscoRAM().size() > 0
+            ) {
+                logger.info(
+                        "\nNome da maquina do Usuário: " + rede.getParametros().getHostName()
+                                + "\nCPU: " + gravadorService.getListRiscoCPU().get(gravadorService.getListRiscoCPU().size() - 1).toString()
+                                + "\nHD: " + gravadorService.getListRiscoHD().get(gravadorService.getListRiscoHD().size() - 1)
+                                + "\nRam: " + gravadorService.getListRiscoRAM().get(gravadorService.getListRiscoRAM().size() - 1)
+                );
+            }
 
         } catch (SecurityException e) {
             e.printStackTrace();
