@@ -61,7 +61,6 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                 try {
                     //CPU
                     home.usoAtualCPU.setText(String.format("%.0f%%", looca.getProcessador().getUso()));
-                    System.out.println(looca.getProcessador().getUso());
                     home.usocpu2.setText(String.format("%.0f%%", api.buscarBancoCpuPico()));
                     home.usocpu3.setText(String.format("%s", api.buscarBancoCpuStatus()));
                     home.usocpu4.setText(String.format("%s", api.buscarBancoCpuContagem()));
