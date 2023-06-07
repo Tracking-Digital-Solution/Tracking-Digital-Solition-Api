@@ -37,6 +37,8 @@ public class ColetaRamService implements Ilooca, ITemplateJdbc {
             System.out.println(e.getMessage());
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Não Possui dados estaticos parametrizados para enviar para o slack");
         }
     }
 
