@@ -55,7 +55,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
 "    END AS Status\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHota) = DAY(getDate())\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '" + getSystemName()+"') AND DAY(cc.dataHota) = DAY(getDate())\n" +
 "order by cc.usoAtual desc  ",String.class);
         return cpu;
     }
@@ -65,7 +65,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
 "    'Limite atingido: ' + CAST(COUNT(*) AS NVARCHAR) + 'x' AS Contagem\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON')\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '" + getSystemName()+"') " +
 "GROUP BY cc.usoAtual",String.class);
         return cpu;
     }
@@ -75,7 +75,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
     public Double buscarBancoHDPico() throws UnknownHostException {
         Long hd = con.queryForObject("SELECT MAX(cc.disponivel) pico FROM maquinacorporativa mc \n" +
 "        INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
-"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())"
+"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '"+getSystemName()+"') AND DAY(cc.dataHora) = DAY(getDate())"
                 ,Long.class);
 
                             Double hdUsadoGB = hd / Math.pow(1024, 3);
@@ -95,7 +95,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
 "    END AS Status\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '"+getSystemName()+"') AND DAY(cc.dataHora) = DAY(getDate())\n" +
 "order by cc.disponivel desc  ",String.class);
         return hd;
     }
@@ -105,7 +105,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
 "    'Limite atingido: ' + CAST(COUNT(*) AS NVARCHAR) + 'x' AS Contagem\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON')\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '"+getSystemName()+"')\n" +
 "GROUP BY cc.disponivel",String.class);
         return hd;
     }
@@ -114,7 +114,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
     public Double buscarBancoRAMPico() throws UnknownHostException {
         Long ram = con.queryForObject("SELECT MAX(cc.usoAtual) pico FROM maquinacorporativa mc \n" +
 "        INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
-"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())"
+"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '"+getSystemName()+"') AND DAY(cc.dataHora) = DAY(getDate())"
                 ,Long.class);
         
               Double ramUsadoGB =  ram / Math.pow(1024, 3);
@@ -134,7 +134,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
 "    END AS Status\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '"+getSystemName()+"') AND DAY(cc.dataHora) = DAY(getDate())\n" +
 "order by cc.disponivel desc  ",String.class);
         return hd;
     }
@@ -144,7 +144,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
             "FROM maquinacorporativa mc\n" +
             "INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
             "WHERE\n" +
-            "    fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON')\n" +
+            "    fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '"+getSystemName()+"')\n" +
             "    AND cc.usoAtual <= (\n" +
             "        SELECT MAX(ce.usoAtual)\n" +
             "        FROM coletaram ce\n" +
