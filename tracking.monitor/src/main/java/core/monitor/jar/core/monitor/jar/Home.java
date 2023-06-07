@@ -27,15 +27,62 @@ import java.util.TimerTask;
  */
 public class Home extends javax.swing.JFrame implements Ilooca {
 
-     private static Integer contador = 0;
-    
+    private static Integer contador = 0;
+
     /**
      * Creates new form Home
      */
     public Home() throws UnknownHostException, InterruptedException {
         initComponents();
+        atualizarDados();
         //MonitorApp monitorApp = new MonitorApp();
         //monitorApp.main(null);
+    }
+
+    public void atualizarDados() {
+        Home home = this;
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                FuncoesApi api = new FuncoesApi();
+                Looca looca = new Looca();
+                Long hdDisponivel = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
+                Double hdDisponivelGB = hdDisponivel / (1024.0 * 1024.0 * 1024.0);
+                Long hdTotal = looca.getGrupoDeDiscos().getTamanhoTotal();
+                Double hdTotalGB = hdTotal / (1024.0 * 1024.0 * 1024.0);
+                Double contaHD = ((hdTotalGB - hdDisponivelGB) / hdTotalGB) * 100;
+
+                Long ramDisponivel = looca.getMemoria().getDisponivel();
+                Double ramDisponivelGB = ramDisponivel / Math.pow(1024, 3);
+                Long ramTotal = looca.getMemoria().getTotal();
+                Double ramTotalGB = ramTotal / Math.pow(1024, 3);
+                Double contaRAM = ((ramTotalGB - ramDisponivelGB) / ramTotalGB) * 100;
+                try {
+                    //CPU
+                    home.usoAtualCPU.setText(String.format("%.0f%%", looca.getProcessador().getUso()));
+                    System.out.println(looca.getProcessador().getUso());
+                    home.usocpu2.setText(String.format("%.0f%%", api.buscarBancoCpuPico()));
+                    home.usocpu3.setText(String.format("%s", api.buscarBancoCpuStatus()));
+                    home.usocpu4.setText(String.format("%s", api.buscarBancoCpuContagem()));
+
+                    //HD
+                    home.usoAtualHD.setText(String.format("%.0f%%", contaHD));
+                    home.usohd2.setText(String.format("%.0f%%", api.buscarBancoHDPico()));
+                    home.usohd3.setText(String.format("%s", api.buscarBancoHdStatus()));
+                    home.usohd4.setText(String.format("%s", api.buscarBancoHdContagem()));
+
+                    //RAM
+                    home.usoAtualRAM.setText(String.format("%.0f%%", contaRAM));
+                    home.usoram2.setText(String.format("%.0f%%", api.buscarBancoRAMPico()));
+                    home.usoram3.setText(String.format("%s", api.buscarBancoRamStatus()));
+                    home.usoram4.setText(String.format("%s", api.buscarBancoRamContagem()));
+                    home.repaint();
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }, 1000, 2000);
     }
 
     /**
@@ -563,6 +610,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
         System.out.println(memoria);
         System.out.println("INFORMAÇÕES DE DISCO");
         System.out.println(discoGrupo.getDiscos());
+        this.repaint();
         System.out.println("------------------------------------");
 
 
@@ -580,8 +628,8 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     }//GEN-LAST:event_dateTimeMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      MonitorAppJar jar = new MonitorAppJar();
-        Timer  timer = new Timer();
+        MonitorAppJar jar = new MonitorAppJar();
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -593,85 +641,6 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Home home = new Home();
-                    home.setVisible(true);
-                                       
-                    Timer  timer = new Timer();
-                    timer.scheduleAtFixedRate(new TimerTask() {
-                        @Override
-                        public void run() {
-                            FuncoesApi api = new FuncoesApi();
-                            Looca looca = new Looca();
-                            Long hdDisponivel = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
-                            Double hdDisponivelGB = hdDisponivel / (1024.0 * 1024.0 * 1024.0);
-                            Long hdTotal = looca.getGrupoDeDiscos().getTamanhoTotal();
-                            Double hdTotalGB = hdTotal / (1024.0 * 1024.0 * 1024.0);
-                            Double contaHD = ((hdTotalGB - hdDisponivelGB)  / hdTotalGB) * 100;
-                            
-                             Long ramDisponivel = looca.getMemoria().getDisponivel();
-                             Double ramDisponivelGB = ramDisponivel / Math.pow(1024, 3);
-                             Long ramTotal = looca.getMemoria().getTotal();
-                             Double ramTotalGB = ramTotal / Math.pow(1024, 3);
-                             Double contaRAM = ((ramTotalGB - ramDisponivelGB) / ramTotalGB) * 100;
-                             try {
-                                //CPU
-                                home.usoAtualCPU.setText(String.format("%.0f%%", looca.getProcessador().getUso()));
-                                home.usocpu2.setText(String.format("%.0f%%", api.buscarBancoCpuPico()));
-                                home.usocpu3.setText(String.format("%s",api.buscarBancoCpuStatus()));
-                                home.usocpu4.setText(String.format("%s", api.buscarBancoCpuContagem()));
-                                
-                                //HD
-                                home.usoAtualHD.setText(String.format("%.0f%%",contaHD));
-                                home.usohd2.setText(String.format("%.0f%%", api.buscarBancoHDPico()));
-                                home.usohd3.setText(String.format("%s", api.buscarBancoHdStatus()));
-                               home.usohd4.setText(String.format("%s",api.buscarBancoHdContagem()));
-                               
-                               //RAM
-                                home.usoAtualRAM.setText(String.format("%.0f%%",contaRAM));
-                                home.usoram2.setText(String.format("%.0f%%", api.buscarBancoRAMPico()));
-                                home.usoram3.setText(String.format("%s", api.buscarBancoRamStatus()));
-                                home.usoram4.setText(String.format("%s",api.buscarBancoRamContagem()));
-                                home.repaint();
-                            } catch (UnknownHostException ex) {
-                                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    }, 1000, 2000);
-                    
-                } catch (UnknownHostException | InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizarDados;
@@ -720,10 +689,8 @@ public class Home extends javax.swing.JFrame implements Ilooca {
     private javax.swing.JLabel usoram4;
     // End of variables declaration//GEN-END:variables
 
-    
     @Override
     public String getIp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
-
