@@ -211,7 +211,7 @@ public class Login extends javax.swing.JFrame implements Ilooca {
                     }
                 }
             } else {
-                System.out.println("Modo raiz on\n"
+                System.out.println("Você escolheu: CLI\n"
                         + "Digite seu email\n");
                 String email = sc.next();
                 System.out.println("Digite sua senha\n");

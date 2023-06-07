@@ -33,9 +33,12 @@ public class ColetaHdService implements Ilooca, ITemplateJdbc {
         );
         System.out.println("Insert coleta HD: Concluído com êxito");
         try {
-            App app = new App();
-            app.sendMessageHD(longDisponivelHd);
-            app.sendMessageAlertHD(longDisponivelHd);
+            Long var = 20000000000L;
+            if(longDisponivelHd > var){
+                App app = new App();
+                app.sendMessageHD(longDisponivelHd);
+                app.sendMessageAlertHD(longDisponivelHd);
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (InterruptedException e) {

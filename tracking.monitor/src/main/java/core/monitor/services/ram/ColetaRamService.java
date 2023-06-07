@@ -30,9 +30,9 @@ public class ColetaRamService implements Ilooca, ITemplateJdbc {
         );
         System.out.println("Insert coleta RAM: Concluído com êxito");
         try {
-            App app = new App();
-            app.sendMessageRAM(longUsoAtual);
-            app.sendMessageAlertRAM(longUsoAtual);
+               App app = new App();
+               app.sendMessageRAM(longUsoAtual);
+               app.sendMessageAlertRAM(longUsoAtual);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (InterruptedException e) {

@@ -28,9 +28,9 @@ public class ColetaCpuService implements Ilooca, ITemplateJdbc {
 		);
 		System.out.println("Insert coleta cpu: Concluído com êxito");
 		try {
-			App app = new App();
-			app.sendMessageCPU(usoAtual);
-			app.sendMessageAlertCPU(usoAtual);
+				App app = new App();
+				app.sendMessageCPU(usoAtual);
+				app.sendMessageAlertCPU(usoAtual);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} catch (InterruptedException e) {

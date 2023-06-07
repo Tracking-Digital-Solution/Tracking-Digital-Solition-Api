@@ -30,7 +30,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
     Double cpu = con.queryForObject(
         "SELECT MAX(cc.usoAtual) pico FROM maquinacorporativa mc " +
         "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa " +
-        "WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '" + getSystemName() + "') AND DAY(cc.dataHota) < DAY(getDate())",
+        "WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = '" + getSystemName() + "') AND DAY(cc.dataHota) = DAY(getDate())",
         Double.class
     );
     return cpu;
@@ -49,13 +49,13 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
     public String buscarBancoCpuStatus() throws UnknownHostException{
         String cpu = con.queryForObject("SELECT TOP 1\n" +
 "    CASE\n" +
-"        WHEN cc.usoAtual <= (SELECT MAX(ce.usoAtual) FROM coletaCpu ce WHERE DAY(cc.dataHota) < DAY(getDate()))\n" +
+"        WHEN cc.usoAtual <= (SELECT MAX(ce.usoAtual) FROM coletaCpu ce WHERE DAY(cc.dataHota) = DAY(getDate()))\n" +
 "		 THEN 'OK'\n" +
 "        ELSE 'Aviso'\n" +
 "    END AS Status\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletacpu cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHota) < DAY(getDate())\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHota) = DAY(getDate())\n" +
 "order by cc.usoAtual desc  ",String.class);
         return cpu;
     }
@@ -75,27 +75,27 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
     public Double buscarBancoHDPico() throws UnknownHostException {
         Long hd = con.queryForObject("SELECT MAX(cc.disponivel) pico FROM maquinacorporativa mc \n" +
 "        INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
-"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())"
+"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())"
                 ,Long.class);
 
                             Double hdUsadoGB = hd / Math.pow(1024, 3);
                             Long hdTotal = looca.getGrupoDeDiscos().getTamanhoTotal();
                             Double hdTotalGB = hdTotal / (1024.0 * 1024.0 * 1024.0);
-                            Double conta = (hdTotalGB / 100) * hdUsadoGB;
-        return conta;
+                            Double contaHD = ((hdTotalGB - hdUsadoGB)  / hdTotalGB) * 100;
+        return contaHD;
     }
     
       public String buscarBancoHdStatus() throws UnknownHostException{
         String hd = con.queryForObject("SELECT TOP 1\n" +
 "    CASE\n" +
 "        WHEN cc.disponivel <= (\n" +
-"			SELECT MAX(ce.disponivel) FROM coletaHd ce WHERE DAY(cc.dataHora) < DAY(getDate())\n" +
+"			SELECT MAX(ce.disponivel) FROM coletaHd ce WHERE DAY(cc.dataHora) = DAY(getDate())\n" +
 "			)  THEN 'OK'\n" +
 "        ELSE 'Aviso'\n" +
 "    END AS Status\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletahd cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())\n" +
 "order by cc.disponivel desc  ",String.class);
         return hd;
     }
@@ -114,11 +114,13 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
     public Double buscarBancoRAMPico() throws UnknownHostException {
         Long ram = con.queryForObject("SELECT MAX(cc.usoAtual) pico FROM maquinacorporativa mc \n" +
 "        INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa \n" +
-"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())"
+"        WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())"
                 ,Long.class);
-
+        
+              Double ramUsadoGB =  ram / Math.pow(1024, 3);
               Long ramTotal = looca.getMemoria().getTotal();
-              Double contaRAM = (((double) ramTotal / (1024 * 1024) * 12.4) - ((double) ram / (1024 * 1024) /((double) ramTotal / (1024 * 1024)) * 100) )/ 1000;
+              Double ramTotalGB = ramTotal / Math.pow(1024, 3);
+              Double contaRAM = ( ramUsadoGB / ramTotalGB) * 100;
         return contaRAM;
     }
 
@@ -126,13 +128,13 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
         String hd = con.queryForObject("SELECT TOP 1\n" +
 "    CASE\n" +
 "        WHEN cc.usoAtual <= (\n" +
-"			SELECT MAX(ce.disponivel) FROM coletaram ce WHERE DAY(cc.dataHora) < DAY(getDate())\n" +
+"			SELECT MAX(ce.disponivel) FROM coletaram ce WHERE DAY(cc.dataHora) = DAY(getDate())\n" +
 "			)  THEN 'OK'\n" +
 "        ELSE 'Aviso'\n" +
 "    END AS Status\n" +
 "FROM maquinacorporativa mc\n" +
 "INNER JOIN coletaram cc ON cc.fkMaquina = mc.idMaquinaCorporativa\n" +
-"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) < DAY(getDate())\n" +
+"WHERE fkMaquina = (SELECT idMaquinaCorporativa FROM MaquinaCorporativa WHERE nomeMaquina = 'ULTRON') AND DAY(cc.dataHora) = DAY(getDate())\n" +
 "order by cc.disponivel desc  ",String.class);
         return hd;
     }
@@ -150,7 +152,7 @@ public Double buscarBancoCpuPico() throws UnknownHostException {
             "            ce.dataHora >= CAST(DATEADD(DAY, DATEDIFF(DAY, 0, cc.dataHora), 0) AS DATETIME)\n" +
             "            AND ce.dataHora < DATEADD(DAY, 1, CAST(DATEADD(DAY, DATEDIFF(DAY, 0, cc.dataHora), 0) AS DATETIME))\n" +
             "    )\n" +
-            "    AND DAY(cc.dataHora) < DAY(GETDATE())\n" +
+            "    AND DAY(cc.dataHora) = DAY(GETDATE())\n" +
             "GROUP BY cc.disponivel\n" +
             "ORDER BY cc.disponivel DESC;",String.class);
         return ram;

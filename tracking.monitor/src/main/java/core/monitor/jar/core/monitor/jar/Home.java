@@ -500,11 +500,12 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(14, 14, 14))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -629,16 +630,17 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                         public void run() {
                             FuncoesApi api = new FuncoesApi();
                             Looca looca = new Looca();
-                            
-                            Long hdUsado = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
-                            Double hdUsadoGB = hdUsado / (1024.0 * 1024.0 * 1024.0);
+                            Long hdDisponivel = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
+                            Double hdDisponivelGB = hdDisponivel / (1024.0 * 1024.0 * 1024.0);
                             Long hdTotal = looca.getGrupoDeDiscos().getTamanhoTotal();
                             Double hdTotalGB = hdTotal / (1024.0 * 1024.0 * 1024.0);
-                            Double contaHD = (hdTotalGB / 100) * hdUsadoGB;
+                            Double contaHD = ((hdTotalGB - hdDisponivelGB)  / hdTotalGB) * 100;
                             
-                             Long ramUsado = looca.getMemoria().getDisponivel();
+                             Long ramDisponivel = looca.getMemoria().getDisponivel();
+                             Double ramDisponivelGB = ramDisponivel / Math.pow(1024, 3);
                              Long ramTotal = looca.getMemoria().getTotal();
-                              Double contaRAM = ((double) ramTotal / (1024 * 1024 * 1024) * 12.4) - ((double) ramUsado / (1024 * 1024 * 1024) /((double) ramTotal / (1024 * 1024 * 1024)) * 100);
+                             Double ramTotalGB = ramTotal / Math.pow(1024, 3);
+                             Double contaRAM = ((ramTotalGB - ramDisponivelGB) / ramTotalGB) * 100;
                              try {
                                 //CPU
                                 home.usoAtualCPU.setText(String.format("%.0f%%", looca.getProcessador().getUso()));
@@ -657,6 +659,7 @@ public class Home extends javax.swing.JFrame implements Ilooca {
                                 home.usoram2.setText(String.format("%.0f%%", api.buscarBancoRAMPico()));
                                 home.usoram3.setText(String.format("%s", api.buscarBancoRamStatus()));
                                 home.usoram4.setText(String.format("%s",api.buscarBancoRamContagem()));
+                                home.repaint();
                             } catch (UnknownHostException ex) {
                                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                             }
